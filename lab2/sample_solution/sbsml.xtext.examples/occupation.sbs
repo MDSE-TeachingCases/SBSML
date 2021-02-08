@@ -1,0 +1,52 @@
+system Occupation {
+	units {
+		DoorState: bool
+	}
+	
+	sensor Lock(L) {
+		single port L_GPIO
+		param isLocked: DoorState 
+	}
+	
+	actuator Display(D) {
+		single port D_GPIO
+		service set(occupied: DoorState)
+	}
+	
+	fogdevice RPi(R) {
+		single port R_GPIO_1
+		single port R_GPIO_2
+		mips: 200
+	}
+	
+	config WC {
+		node wcLock: Lock
+		node wcDisplay: Display
+		node wcPi: RPi
+		
+		connections: {
+			wcPi.R_GPIO_1 >-< wcLock.L_GPIO,
+			wcPi.R_GPIO_2 >-< wcDisplay.D_GPIO
+		}
+		
+		controller Locked computed on wcPi {
+			mips: 100
+			on: {
+				BoolThreshold(wcLock.isLocked=true)
+			}
+			call: {
+				wcDisplay.set(true);
+			}
+		}
+		
+		controller Unlocked computed on wcPi {
+			mips: 100
+			on: {
+				BoolThreshold(wcLock.isLocked=false)
+			}
+			call: {
+				wcDisplay.set(false);
+			}
+		}
+	}
+}

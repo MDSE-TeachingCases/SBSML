@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sbsml:SmartSystem
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:sbsml="http://big.tuwien.ac.at/sbsml"
+    xsi:schemaLocation="http://big.tuwien.ac.at/sbsml ../model/sbsml.ecore"
+    name="SmartHome">
+  <things xsi:type="sbsml:Sensor"
+      name="HumiditySensor"
+      shortName="HS">
+    <ports name="HS_GPIO"/>
+    <parameters
+        name="humidity"
+        unit="Percent"/>
+  </things>
+  <things xsi:type="sbsml:Sensor"
+      name="TemperatureSensor"
+      shortName="TS">
+    <ports name="TS_GPIO"/>
+    <parameters
+        name="temperature"
+        unit="Celsius"/>
+  </things>
+  <things xsi:type="sbsml:Sensor"
+      name="MovementSensor"
+      shortName="MS">
+    <ports name="MS_GPIO"/>
+    <parameters
+        name="isMoving"
+        unit="Moving"/>
+  </things>
+  <things xsi:type="sbsml:Sensor"
+      name="GasDetector"
+      shortName="GD">
+    <ports name="GD_GPIO"/>
+    <parameters
+        name="concentration"
+        unit="PPM"/>
+  </things>
+  <things xsi:type="sbsml:Actuator"
+      name="Ventilator"
+      shortName="V">
+    <ports name="V_GPIO"/>
+    <services
+        name="startVent"/>
+  </things>
+  <things xsi:type="sbsml:Actuator"
+      name="Radiator"
+      shortName="R">
+    <ports name="R_GPIO"/>
+    <services
+        name="setHeatingLevel">
+      <parameters
+          name="level"
+          unit="HeatingLevel"/>
+    </services>
+  </things>
+  <things xsi:type="sbsml:Actuator"
+      name="LightBulb"
+      shortName="LB">
+    <ports name="LB_ZIGBEE"/>
+    <ports name="LB_GPIO"/>
+    <services
+        name="setLight">
+      <parameters
+          name="brightness"
+          unit="Percent"/>
+      <parameters
+          name="timeout"
+          unit="Second"/>
+    </services>
+    <services
+        name="alarm"/>
+  </things>
+  <things xsi:type="sbsml:Actuator"
+      name="AlarmBell"
+      shortName="AB">
+    <ports name="AB_GPIO"/>
+    <services
+        name="ringBell"/>
+  </things>
+  <things xsi:type="sbsml:FogDevice"
+      name="Raspberry"
+      shortName="RPi"
+      mips="10000">
+    <ports name="RPI_GPIO_1"/>
+    <ports name="RPI_GPIO_2"/>
+    <ports name="RPI_GPIO_3"/>
+    <ports name="RPI_GPIO_4"/>
+    <ports name="RPI_USB"/>
+  </things>
+  <things xsi:type="sbsml:FogDevice"
+      name="ZigBeeUSBGateway"
+      shortName="ZB"
+      mips="10">
+    <ports name="ZB_USB"/>
+    <ports name="ZB_RF4CE"
+        singleConnection="false"/>
+  </things>
+  <units name="Celsius"
+      type="FLOAT"
+      abbreviation="° C"/>
+  <units name="Percent"
+      type="FLOAT"
+      abbreviation="%"/>
+  <units name="Moving"
+      type="BOOL"/>
+  <units name="PPM"
+      abbreviation="ppm"/>
+  <units name="HeatingLevel"/>
+  <units name="Second"
+      abbreviation="sec"/>
+  <configs name="Basement">
+    <nodes name="BaseL"
+        thing="LightBulb"/>
+    <nodes name="BaseGD"
+        thing="GasDetector"/>
+    <nodes name="BaseM"
+        thing="MovementSensor"/>
+    <nodes name="BasePi"
+        thing="Raspberry"/>
+    <nodes name="BaseBell"
+        thing="AlarmBell"/>
+    <connections
+        portB="LB_GPIO"
+        portA="RPI_GPIO_1"
+        nodeA="BasePi"
+        nodeB="BaseL"/>
+    <connections
+        portB="GD_GPIO"
+        portA="RPI_GPIO_2"
+        nodeA="BasePi"
+        nodeB="BaseGD"/>
+    <connections
+        portB="MS_GPIO"
+        portA="RPI_GPIO_3"
+        nodeA="BasePi"
+        nodeB="BaseM"/>
+    <connections
+        portB="AB_GPIO"
+        portA="RPI_GPIO_4"
+        nodeA="BasePi"
+        nodeB="BaseBell"/>
+    <controllers
+        name="BaseGasLeakController"
+        mips="300"
+        computationNode="BasePi">
+      <threshold
+          xsi:type="sbsml:IntThreshold"
+          source="BaseGD"
+          parameter="concentration"
+          value="500"/>
+      <servicecalls
+          service="alarm"
+          node="BaseL"/>
+      <servicecalls
+          service="ringBell"
+          node="BaseBell"/>
+    </controllers>
+    <controllers
+        name="BaseLightController"
+        mips="500"
+        computationNode="BasePi">
+      <threshold
+          xsi:type="sbsml:BoolThreshold"
+          source="BaseM"
+          parameter="isMoving"
+          triggerOn="true"/>
+      <servicecalls
+          service="setLight"
+          node="BaseL">
+        <arguments
+            stringValue="100"/>
+        <arguments
+            stringValue="500"/>
+      </servicecalls>
+    </controllers>
+  </configs>
+  <configs name="Bathroom">
+    <nodes name="BathHS"
+        thing="HumiditySensor"/>
+    <nodes name="BathV"
+        thing="Ventilator"/>
+    <nodes name="BathM"
+        thing="MovementSensor"/>
+    <nodes name="BathPi"
+        thing="Raspberry"/>
+    <connections
+        portB="HS_GPIO"
+        portA="RPI_GPIO_1"
+        nodeA="BathPi"
+        nodeB="BathHS"/>
+    <connections
+        portB="V_GPIO"
+        portA="RPI_GPIO_2"
+        nodeA="BathPi"
+        nodeB="BathV"/>
+    <connections
+        portB="MS_GPIO"
+        portA="RPI_GPIO_3"
+        nodeA="BathPi"
+        nodeB="BathM"/>
+    <controllers
+        name="BathHumidityController"
+        mips="300"
+        computationNode="BathPi">
+      <threshold
+          xsi:type="sbsml:FloatThreshold"
+          source="BathHS"
+          parameter="humidity"
+          value="0.8"/>
+      <threshold
+          xsi:type="sbsml:BoolThreshold"
+          source="BathM"
+          parameter="isMoving"/>
+      <servicecalls
+          service="startVent"
+          node="BathV"/>
+    </controllers>
+  </configs>
+  <configs name="Livingroom">
+    <nodes name="LivBulb1"
+        thing="LightBulb"/>
+    <nodes name="LivBulb2"
+        thing="LightBulb"/>
+    <nodes name="LivBulb3"
+        thing="LightBulb"/>
+    <nodes name="LivZGW"
+        thing="ZigBeeUSBGateway"/>
+    <nodes name="LivPi"
+        thing="Raspberry"/>
+    <nodes name="LivM1"
+        thing="MovementSensor"/>
+    <nodes name="LivM2"
+        thing="MovementSensor"/>
+    <nodes name="LivTS"
+        thing="TemperatureSensor"/>
+    <nodes name="LivR"
+        thing="Radiator"/>
+    <connections
+        portB="ZB_USB"
+        portA="RPI_USB"
+        nodeA="LivPi"
+        nodeB="LivZGW"/>
+    <connections
+        portB="LB_ZIGBEE"
+        portA="ZB_RF4CE"
+        nodeA="LivZGW"
+        nodeB="LivBulb1"/>
+    <connections
+        portB="LB_ZIGBEE"
+        portA="ZB_RF4CE"
+        nodeA="LivZGW"
+        nodeB="LivBulb2"/>
+    <connections
+        portB="LB_ZIGBEE"
+        portA="ZB_RF4CE"
+        nodeA="LivZGW"
+        nodeB="LivBulb3"/>
+    <connections
+        portB="MS_GPIO"
+        portA="RPI_GPIO_1"
+        nodeA="LivPi"
+        nodeB="LivM1"/>
+    <connections
+        portB="MS_GPIO"
+        portA="RPI_GPIO_2"
+        nodeA="LivPi"
+        nodeB="LivM2"/>
+    <connections
+        portB="TS_GPIO"
+        portA="RPI_GPIO_3"
+        nodeA="LivPi"
+        nodeB="LivTS"/>
+    <connections
+        portB="R_GPIO"
+        portA="RPI_GPIO_4"
+        nodeA="LivPi"
+        nodeB="LivR"/>
+    <controllers
+        name="LivLightController1"
+        mips="300"
+        computationNode="LivPi">
+      <threshold
+          xsi:type="sbsml:BoolThreshold"
+          source="LivM1"
+          parameter="isMoving"
+          triggerOn="true"/>
+      <servicecalls
+          service="setLight"
+          node="LivBulb1">
+        <arguments
+            stringValue="100"/>
+        <arguments
+            stringValue="600"/>
+      </servicecalls>
+    </controllers>
+    <controllers
+        name="LivLightController2"
+        mips="300"
+        computationNode="LivPi">
+      <threshold
+          xsi:type="sbsml:BoolThreshold"
+          source="LivM2"
+          parameter="isMoving"
+          triggerOn="true"/>
+      <servicecalls
+          service="setLight"
+          node="LivBulb2">
+        <arguments
+            stringValue="100"/>
+        <arguments
+            stringValue="600"/>
+      </servicecalls>
+      <servicecalls
+          service="setLight"
+          node="LivBulb3">
+        <arguments
+            stringValue="100"/>
+        <arguments
+            stringValue="600"/>
+      </servicecalls>
+    </controllers>
+    <controllers
+        name="LivLowTempratureController"
+        mips="500"
+        computationNode="LivPi">
+      <threshold
+          xsi:type="sbsml:FloatThreshold"
+          source="LivTS"
+          parameter="temperature"
+          value="20.0"
+          comperator="SMALLER"/>
+      <servicecalls
+          service="setHeatingLevel"
+          node="LivR">
+        <arguments
+            stringValue="5"/>
+      </servicecalls>
+    </controllers>
+    <controllers
+        name="LivHighTempratureController"
+        mips="500"
+        computationNode="LivPi">
+      <threshold
+          xsi:type="sbsml:FloatThreshold"
+          source="LivTS"
+          parameter="temperature"
+          value="22.0"/>
+      <servicecalls
+          service="setHeatingLevel"
+          node="LivR">
+        <arguments
+            stringValue="0"/>
+      </servicecalls>
+    </controllers>
+  </configs>
+</sbsml:SmartSystem>

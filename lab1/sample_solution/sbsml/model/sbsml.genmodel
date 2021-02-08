@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel"
+    modelDirectory="/sbsml/src-gen" creationIcons="false" editDirectory="/sbsml.edit/src-gen"
+    editorDirectory="/sbsml.editor/src-gen" modelPluginID="sbsml" modelName="Sbsml"
+    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" codeFormatting="true"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0" copyrightFields="false"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>sbsml.ecore</foreignModel>
+  <testsDirectory xsi:nil="true"/>
+  <genPackages prefix="Sbsml" disposableProviderFactory="true" ecorePackage="sbsml.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="sbsml.ecore#//Comparator">
+      <genEnumLiterals ecoreEnumLiteral="sbsml.ecore#//Comparator/GREATER"/>
+      <genEnumLiterals ecoreEnumLiteral="sbsml.ecore#//Comparator/SMALLER"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="sbsml.ecore#//DataType">
+      <genEnumLiterals ecoreEnumLiteral="sbsml.ecore#//DataType/INT"/>
+      <genEnumLiterals ecoreEnumLiteral="sbsml.ecore#//DataType/FLOAT"/>
+      <genEnumLiterals ecoreEnumLiteral="sbsml.ecore#//DataType/BOOL"/>
+    </genEnums>
+    <genClasses ecoreClass="sbsml.ecore#//SmartSystem">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sbsml.ecore#//SmartSystem/things"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sbsml.ecore#//SmartSystem/units"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sbsml.ecore#//SmartSystem/configs"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="sbsml.ecore#//Thing">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sbsml.ecore#//Thing/ports"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sbsml.ecore#//Thing/shortName"/>
+    </genClasses>
+    <genClasses ecoreClass="sbsml.ecore#//Sensor"/>
+    <genClasses ecoreClass="sbsml.ecore#//Actuator">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sbsml.ecore#//Actuator/services"/>
+    </genClasses>
+    <genClasses ecoreClass="sbsml.ecore#//FogDevice">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sbsml.ecore#//FogDevice/mips"/>
+    </genClasses>
+    <genClasses ecoreClass="sbsml.ecore#//Configuration">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sbsml.ecore#//Configuration/nodes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sbsml.ecore#//Configuration/connections"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sbsml.ecore#//Configuration/controllers"/>
+    </genClasses>
+    <genClasses ecoreClass="sbsml.ecore#//Node">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference sbsml.ecore#//Node/thing"/>
+    </genClasses>
+    <genClasses ecoreClass="sbsml.ecore#//Connection">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference sbsml.ecore#//Connection/portB"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference sbsml.ecore#//Connection/portA"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference sbsml.ecore#//Connection/nodeA"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference sbsml.ecore#//Connection/nodeB"/>
+    </genClasses>
+    <genClasses ecoreClass="sbsml.ecore#//Port">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sbsml.ecore#//Port/singleConnection"/>
+    </genClasses>
+    <genClasses ecoreClass="sbsml.ecore#//Controller">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sbsml.ecore#//Controller/threshold"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sbsml.ecore#//Controller/servicecalls"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sbsml.ecore#//Controller/mips"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference sbsml.ecore#//Controller/computationNode"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="sbsml.ecore#//Threshold">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference sbsml.ecore#//Threshold/source"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference sbsml.ecore#//Threshold/parameter"/>
+    </genClasses>
+    <genClasses ecoreClass="sbsml.ecore#//IntThreshold">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sbsml.ecore#//IntThreshold/value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sbsml.ecore#//IntThreshold/comperator"/>
+    </genClasses>
+    <genClasses ecoreClass="sbsml.ecore#//BoolThreshold">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sbsml.ecore#//BoolThreshold/triggerOn"/>
+    </genClasses>
+    <genClasses ecoreClass="sbsml.ecore#//FloatThreshold">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sbsml.ecore#//FloatThreshold/value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sbsml.ecore#//FloatThreshold/comperator"/>
+    </genClasses>
+    <genClasses ecoreClass="sbsml.ecore#//Parameter">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference sbsml.ecore#//Parameter/unit"/>
+    </genClasses>
+    <genClasses ecoreClass="sbsml.ecore#//Unit">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sbsml.ecore#//Unit/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sbsml.ecore#//Unit/abbreviation"/>
+    </genClasses>
+    <genClasses ecoreClass="sbsml.ecore#//Service">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sbsml.ecore#//Service/description"/>
+    </genClasses>
+    <genClasses ecoreClass="sbsml.ecore#//ServiceCall">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference sbsml.ecore#//ServiceCall/service"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference sbsml.ecore#//ServiceCall/node"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sbsml.ecore#//ServiceCall/arguments"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="sbsml.ecore#//ParameterisedElement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sbsml.ecore#//ParameterisedElement/parameters"/>
+    </genClasses>
+    <genClasses ecoreClass="sbsml.ecore#//Argument">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sbsml.ecore#//Argument/stringValue"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="sbsml.ecore#//NamedElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sbsml.ecore#//NamedElement/name"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

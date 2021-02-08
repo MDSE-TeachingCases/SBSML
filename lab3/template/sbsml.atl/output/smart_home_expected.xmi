@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<CAEX:CAEXFile xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:CAEX="http://caex" fileName="SmartHome" schemaVersion="2.15">
+  <instanceHierarchy name="SmartHome">
+    <internalElement name="Basement">
+      <internalElement name="BaseL(LightBulb)">
+        <internalElement name="setLight(brightness: Percent, timeout: Second)"/>
+        <internalElement name="alarm()"/>
+      </internalElement>
+      <internalElement name="BaseGD(GasDetector)">
+        <internalElement name="concentration">
+          <attribute name="unit" value="PPM"/>
+        </internalElement>
+      </internalElement>
+      <internalElement name="BaseM(MovementSensor)">
+        <internalElement name="isMoving">
+          <attribute name="unit" value="Moving"/>
+        </internalElement>
+      </internalElement>
+      <internalElement name="BasePi(Raspberry)">
+        <attribute name="mips" value="10000"/>
+      </internalElement>
+      <internalElement name="BaseBell(AlarmBell)">
+        <internalElement name="ringBell()"/>
+      </internalElement>
+    </internalElement>
+    <internalElement name="Bathroom">
+      <internalElement name="BathHS(HumiditySensor)">
+        <internalElement name="humidity">
+          <attribute name="unit" value="Percent"/>
+        </internalElement>
+      </internalElement>
+      <internalElement name="BathV(Ventilator)">
+        <internalElement name="startVent()"/>
+      </internalElement>
+      <internalElement name="BathM(MovementSensor)">
+        <internalElement name="isMoving">
+          <attribute name="unit" value="Moving"/>
+        </internalElement>
+      </internalElement>
+      <internalElement name="BathPi(Raspberry)">
+        <attribute name="mips" value="10000"/>
+      </internalElement>
+    </internalElement>
+    <internalElement name="Livingroom">
+      <internalElement name="LivBulb1(LightBulb)">
+        <internalElement name="setLight(brightness: Percent, timeout: Second)"/>
+        <internalElement name="alarm()"/>
+      </internalElement>
+      <internalElement name="LivBulb2(LightBulb)">
+        <internalElement name="setLight(brightness: Percent, timeout: Second)"/>
+        <internalElement name="alarm()"/>
+      </internalElement>
+      <internalElement name="LivBulb3(LightBulb)">
+        <internalElement name="setLight(brightness: Percent, timeout: Second)"/>
+        <internalElement name="alarm()"/>
+      </internalElement>
+      <internalElement name="LivZGW(ZigBeeUSBGateway)">
+        <attribute name="mips" value="10"/>
+      </internalElement>
+      <internalElement name="LivPi(Raspberry)">
+        <attribute name="mips" value="10000"/>
+      </internalElement>
+      <internalElement name="LivM1(MovementSensor)">
+        <internalElement name="isMoving">
+          <attribute name="unit" value="Moving"/>
+        </internalElement>
+      </internalElement>
+      <internalElement name="LivM2(MovementSensor)">
+        <internalElement name="isMoving">
+          <attribute name="unit" value="Moving"/>
+        </internalElement>
+      </internalElement>
+      <internalElement name="LivTS(TemperatureSensor)">
+        <internalElement name="temperature">
+          <attribute name="unit" value="Celsius"/>
+        </internalElement>
+      </internalElement>
+      <internalElement name="LivR(Radiator)">
+        <internalElement name="setHeatingLevel(level: HeatingLevel)">
+          <attribute name="description" value="Change the heat."/>
+        </internalElement>
+      </internalElement>
+    </internalElement>
+  </instanceHierarchy>
+</CAEX:CAEXFile>

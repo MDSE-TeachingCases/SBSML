@@ -1,0 +1,110 @@
+-- @path CAEX=/sbsml.atl/caex/CAEX.ecore
+-- @path SBSML=/sbsml/model/sbsml.ecore
+
+module sbsml2caex;
+create OUT: CAEX from IN: SBSML;
+
+rule SmartSystem2InstanceHierarchy {
+	from
+		sys : SBSML!SmartSystem
+	to 
+		file: CAEX!CAEXFile (
+			fileName <- sys.name,
+			instanceHierarchy <- instanceHierarchy,
+			schemaVersion <- '2.15'
+		),
+		instanceHierarchy: CAEX!InstanceHierarchy (
+			name <- sys.name,
+			internalElement <- sys.configs
+		)
+}
+
+rule Config2InternalElement {
+	from
+		conf : SBSML!Configuration
+	to
+		ie : CAEX!InternalElement (
+			name <- conf.name,
+			internalElement <- conf.nodes
+		)
+}
+
+-- Nodes
+abstract rule Node2InternalElement {
+	from
+		n : SBSML!Node
+	to
+		ie : CAEX!InternalElement(
+			name <- n.name + '(' + n.thing.name + ')'
+		)
+}
+
+rule SensorNode2InternalElement extends Node2InternalElement {
+	from
+		n : SBSML!Node (n.thing.oclIsTypeOf(SBSML!Sensor))
+	to
+		ie : CAEX!InternalElement (
+			internalElement <- n.thing.parameters->collect(p|thisModule.createInternalSensedParameterElement(p))
+		)
+}
+
+rule ActuatorNode2InternalElement extends Node2InternalElement {
+	from
+		n : SBSML!Node (n.thing.oclIsTypeOf(SBSML!Actuator))
+	to
+		ie : CAEX!InternalElement (
+			internalElement <- n.thing.services->collect(svc|thisModule.createInternalServiceElement(svc))
+		)
+}
+
+rule FogDeviceNode2InternalElement extends Node2InternalElement {
+	from
+		n : SBSML!Node (n.thing.oclIsTypeOf(SBSML!FogDevice))
+	to
+		ie : CAEX!InternalElement (
+			attribute <- thisModule.createAttribute('mips', n.thing.mips)
+		)
+}
+
+
+
+
+-- Called Attribute Rule
+rule createAttribute(name: String, value: OclAny) {
+	to
+		attribute: CAEX!Attribute (
+			name <- name,
+			value <- value.toString()
+		)
+	do {
+		attribute; 
+	}
+}
+
+rule createInternalServiceElement(svc: SBSML!Service) {
+	to
+		ie : CAEX!InternalElement (
+			name <- thisModule.serviceSignature(svc)
+		)
+	do {
+		if (not svc.description.oclIsUndefined())
+			ie.attribute <- thisModule.createAttribute('description', svc.description);
+		ie;
+	}
+}
+
+rule createInternalSensedParameterElement(param: SBSML!Parameter) {
+	to
+		ie : CAEX!InternalElement (
+			name <- param.name,
+			attribute <- thisModule.createAttribute('unit', param.unit.name)
+		)
+	do {
+		ie;
+	}
+}
+
+-- helpers
+helper def: serviceSignature(svc: SBSML!Service):
+	String = svc.name + '(' + svc.parameters->iterate(e; str: String = '' | str + e.name + ': ' + e.unit.name + (if e = svc.parameters.last() then '' else ', ' endif)) + ')';
+	

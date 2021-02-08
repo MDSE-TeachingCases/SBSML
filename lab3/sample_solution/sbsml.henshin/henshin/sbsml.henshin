@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<henshin:Module xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:henshin="http://www.eclipse.org/emf/2011/Henshin" xmi:id="_viJLUA_DEeuCT55zbzDzfA">
+  <imports href="../../sbsml/model/sbsml.ecore#/"/>
+  <units xsi:type="henshin:Rule" xmi:id="_xqG9YA_DEeuCT55zbzDzfA" name="Duplicate1FogNode">
+    <parameters xmi:id="_K2dmoBkQEeucRrgbwoCGnw" name="nodeName" kind="IN">
+      <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </parameters>
+    <parameters xmi:id="_ledoECf6EeuCt4IHth3d2Q" name="duplicateName" kind="IN">
+      <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </parameters>
+    <lhs xmi:id="_xqMc8A_DEeuCT55zbzDzfA" name="Lhs">
+      <nodes xmi:id="_Iw2IgBkREeucRrgbwoCGnw">
+        <type href="../../sbsml/model/sbsml.ecore#//Port"/>
+        <attributes xmi:id="_KG8_0BkREeucRrgbwoCGnw" value="false">
+          <type href="../../sbsml/model/sbsml.ecore#//Port/singleConnection"/>
+        </attributes>
+      </nodes>
+    </lhs>
+    <rhs xmi:id="_xqNEAA_DEeuCT55zbzDzfA" name="Rhs">
+      <nodes xmi:id="_Iw2IgRkREeucRrgbwoCGnw">
+        <type href="../../sbsml/model/sbsml.ecore#//Port"/>
+        <attributes xmi:id="_KG8_0RkREeucRrgbwoCGnw" value="false">
+          <type href="../../sbsml/model/sbsml.ecore#//Port/singleConnection"/>
+        </attributes>
+      </nodes>
+    </rhs>
+    <mappings xmi:id="_Iw2IghkREeucRrgbwoCGnw" origin="_Iw2IgBkREeucRrgbwoCGnw" image="_Iw2IgRkREeucRrgbwoCGnw"/>
+    <multiRules xmi:id="_PzoEMxkQEeucRrgbwoCGnw">
+      <parameters xmi:id="_PzuK0BkQEeucRrgbwoCGnw" name="nodeName" kind="IN">
+        <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </parameters>
+      <parameters xmi:id="_ifn3ABkVEeuvX5cwavdWAg" name="duplicateName" kind="IN">
+        <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </parameters>
+      <lhs xmi:id="_PzoENBkQEeucRrgbwoCGnw" name="Lhs">
+        <nodes xmi:id="_PzoEMBkQEeucRrgbwoCGnw" outgoing="_WJgoMBkQEeucRrgbwoCGnw">
+          <type href="../../sbsml/model/sbsml.ecore#//Configuration"/>
+        </nodes>
+        <nodes xmi:id="_QRnnwBkQEeucRrgbwoCGnw" incoming="_WJgoMBkQEeucRrgbwoCGnw" outgoing="_W8eWMBkQEeucRrgbwoCGnw">
+          <type href="../../sbsml/model/sbsml.ecore#//Node"/>
+          <attributes xmi:id="_YS59oBkQEeucRrgbwoCGnw" value="nodeName">
+            <type href="../../sbsml/model/sbsml.ecore#//NamedElement/name"/>
+          </attributes>
+        </nodes>
+        <nodes xmi:id="_S5NVEBkQEeucRrgbwoCGnw" incoming="_W8eWMBkQEeucRrgbwoCGnw" outgoing="_JTRgIBkREeucRrgbwoCGnw">
+          <type href="../../sbsml/model/sbsml.ecore#//FogDevice"/>
+        </nodes>
+        <nodes xmi:id="_Iw2IhRkREeucRrgbwoCGnw" incoming="_JTRgIBkREeucRrgbwoCGnw">
+          <type href="../../sbsml/model/sbsml.ecore#//Port"/>
+        </nodes>
+        <edges xmi:id="_WJgoMBkQEeucRrgbwoCGnw" source="_PzoEMBkQEeucRrgbwoCGnw" target="_QRnnwBkQEeucRrgbwoCGnw">
+          <type href="../../sbsml/model/sbsml.ecore#//Configuration/nodes"/>
+        </edges>
+        <edges xmi:id="_W8eWMBkQEeucRrgbwoCGnw" source="_QRnnwBkQEeucRrgbwoCGnw" target="_S5NVEBkQEeucRrgbwoCGnw">
+          <type href="../../sbsml/model/sbsml.ecore#//Node/thing"/>
+        </edges>
+        <edges xmi:id="_JTRgIBkREeucRrgbwoCGnw" source="_S5NVEBkQEeucRrgbwoCGnw" target="_Iw2IhRkREeucRrgbwoCGnw">
+          <type href="../../sbsml/model/sbsml.ecore#//Thing/ports"/>
+        </edges>
+      </lhs>
+      <rhs xmi:id="_PzoENRkQEeucRrgbwoCGnw" name="Rhs">
+        <nodes xmi:id="_PzoEMRkQEeucRrgbwoCGnw" outgoing="_WJgoMRkQEeucRrgbwoCGnw _WnztwBkQEeucRrgbwoCGnw _QfaWsBkREeucRrgbwoCGnw">
+          <type href="../../sbsml/model/sbsml.ecore#//Configuration"/>
+        </nodes>
+        <nodes xmi:id="_QRnnwRkQEeucRrgbwoCGnw" incoming="_WJgoMRkQEeucRrgbwoCGnw _RaL84BkREeucRrgbwoCGnw" outgoing="_W8eWMRkQEeucRrgbwoCGnw">
+          <type href="../../sbsml/model/sbsml.ecore#//Node"/>
+          <attributes xmi:id="_YS6ksBkQEeucRrgbwoCGnw" value="nodeName">
+            <type href="../../sbsml/model/sbsml.ecore#//NamedElement/name"/>
+          </attributes>
+        </nodes>
+        <nodes xmi:id="_Ryj2EBkQEeucRrgbwoCGnw" incoming="_WnztwBkQEeucRrgbwoCGnw _Q18AUBkREeucRrgbwoCGnw" outgoing="_XF27sBkQEeucRrgbwoCGnw">
+          <type href="../../sbsml/model/sbsml.ecore#//Node"/>
+          <attributes xmi:id="_ZCEJsBkQEeucRrgbwoCGnw" value="duplicateName">
+            <type href="../../sbsml/model/sbsml.ecore#//NamedElement/name"/>
+          </attributes>
+        </nodes>
+        <nodes xmi:id="_UgT1wBkQEeucRrgbwoCGnw" incoming="_W8eWMRkQEeucRrgbwoCGnw _XF27sBkQEeucRrgbwoCGnw" outgoing="_JTRgIRkREeucRrgbwoCGnw">
+          <type href="../../sbsml/model/sbsml.ecore#//Thing"/>
+        </nodes>
+        <nodes xmi:id="_Iw2IgxkREeucRrgbwoCGnw" incoming="_JTRgIRkREeucRrgbwoCGnw _SM-rwBkREeucRrgbwoCGnw _SVDpsBkREeucRrgbwoCGnw">
+          <type href="../../sbsml/model/sbsml.ecore#//Port"/>
+        </nodes>
+        <nodes xmi:id="_PLpBsBkREeucRrgbwoCGnw" incoming="_QfaWsBkREeucRrgbwoCGnw" outgoing="_Q18AUBkREeucRrgbwoCGnw _RaL84BkREeucRrgbwoCGnw _SM-rwBkREeucRrgbwoCGnw _SVDpsBkREeucRrgbwoCGnw">
+          <type href="../../sbsml/model/sbsml.ecore#//Connection"/>
+        </nodes>
+        <edges xmi:id="_WJgoMRkQEeucRrgbwoCGnw" source="_PzoEMRkQEeucRrgbwoCGnw" target="_QRnnwRkQEeucRrgbwoCGnw">
+          <type href="../../sbsml/model/sbsml.ecore#//Configuration/nodes"/>
+        </edges>
+        <edges xmi:id="_WnztwBkQEeucRrgbwoCGnw" source="_PzoEMRkQEeucRrgbwoCGnw" target="_Ryj2EBkQEeucRrgbwoCGnw">
+          <type href="../../sbsml/model/sbsml.ecore#//Configuration/nodes"/>
+        </edges>
+        <edges xmi:id="_W8eWMRkQEeucRrgbwoCGnw" source="_QRnnwRkQEeucRrgbwoCGnw" target="_UgT1wBkQEeucRrgbwoCGnw">
+          <type href="../../sbsml/model/sbsml.ecore#//Node/thing"/>
+        </edges>
+        <edges xmi:id="_XF27sBkQEeucRrgbwoCGnw" source="_Ryj2EBkQEeucRrgbwoCGnw" target="_UgT1wBkQEeucRrgbwoCGnw">
+          <type href="../../sbsml/model/sbsml.ecore#//Node/thing"/>
+        </edges>
+        <edges xmi:id="_JTRgIRkREeucRrgbwoCGnw" source="_UgT1wBkQEeucRrgbwoCGnw" target="_Iw2IgxkREeucRrgbwoCGnw">
+          <type href="../../sbsml/model/sbsml.ecore#//Thing/ports"/>
+        </edges>
+        <edges xmi:id="_QfaWsBkREeucRrgbwoCGnw" source="_PzoEMRkQEeucRrgbwoCGnw" target="_PLpBsBkREeucRrgbwoCGnw">
+          <type href="../../sbsml/model/sbsml.ecore#//Configuration/connections"/>
+        </edges>
+        <edges xmi:id="_Q18AUBkREeucRrgbwoCGnw" source="_PLpBsBkREeucRrgbwoCGnw" target="_Ryj2EBkQEeucRrgbwoCGnw">
+          <type href="../../sbsml/model/sbsml.ecore#//Connection/nodeA"/>
+        </edges>
+        <edges xmi:id="_RaL84BkREeucRrgbwoCGnw" source="_PLpBsBkREeucRrgbwoCGnw" target="_QRnnwRkQEeucRrgbwoCGnw">
+          <type href="../../sbsml/model/sbsml.ecore#//Connection/nodeB"/>
+        </edges>
+        <edges xmi:id="_SM-rwBkREeucRrgbwoCGnw" source="_PLpBsBkREeucRrgbwoCGnw" target="_Iw2IgxkREeucRrgbwoCGnw">
+          <type href="../../sbsml/model/sbsml.ecore#//Connection/portB"/>
+        </edges>
+        <edges xmi:id="_SVDpsBkREeucRrgbwoCGnw" source="_PLpBsBkREeucRrgbwoCGnw" target="_Iw2IgxkREeucRrgbwoCGnw">
+          <type href="../../sbsml/model/sbsml.ecore#//Connection/portA"/>
+        </edges>
+      </rhs>
+      <mappings xmi:id="_PzoEMhkQEeucRrgbwoCGnw" origin="_PzoEMBkQEeucRrgbwoCGnw" image="_PzoEMRkQEeucRrgbwoCGnw"/>
+      <mappings xmi:id="_QRnnwhkQEeucRrgbwoCGnw" origin="_QRnnwBkQEeucRrgbwoCGnw" image="_QRnnwRkQEeucRrgbwoCGnw"/>
+      <mappings xmi:id="_UgT1wRkQEeucRrgbwoCGnw" origin="_S5NVEBkQEeucRrgbwoCGnw" image="_UgT1wBkQEeucRrgbwoCGnw"/>
+      <mappings xmi:id="_Iw2IhxkREeucRrgbwoCGnw" origin="_Iw2IhRkREeucRrgbwoCGnw" image="_Iw2IgxkREeucRrgbwoCGnw"/>
+      <multiMappings xmi:id="_Iw2IhBkREeucRrgbwoCGnw" origin="_Iw2IgRkREeucRrgbwoCGnw" image="_Iw2IgxkREeucRrgbwoCGnw"/>
+      <multiMappings xmi:id="_Iw2IhhkREeucRrgbwoCGnw" origin="_Iw2IgBkREeucRrgbwoCGnw" image="_Iw2IhRkREeucRrgbwoCGnw"/>
+    </multiRules>
+  </units>
+  <units xsi:type="henshin:Rule" xmi:id="_l3SbkBkDEeucRrgbwoCGnw" name="SingleToMultiConnPort">
+    <lhs xmi:id="_l3WtABkDEeucRrgbwoCGnw" name="Lhs"/>
+    <rhs xmi:id="_l3WtARkDEeucRrgbwoCGnw" name="Rhs"/>
+    <multiRules xmi:id="_SrdGkBkIEeucRrgbwoCGnw">
+      <lhs xmi:id="_Sre7wBkIEeucRrgbwoCGnw" name="Lhs">
+        <nodes xmi:id="_tATFoBkDEeucRrgbwoCGnw" incoming="_iYk8MBkHEeucRrgbwoCGnw _h8IQwBkHEeucRrgbwoCGnw">
+          <type href="../../sbsml/model/sbsml.ecore#//Port"/>
+          <attributes xmi:id="_jXYGwBkHEeucRrgbwoCGnw" value="true">
+            <type href="../../sbsml/model/sbsml.ecore#//Port/singleConnection"/>
+          </attributes>
+        </nodes>
+        <nodes xmi:id="_d0VU8BkHEeucRrgbwoCGnw" incoming="_gkdTMBkHEeucRrgbwoCGnw" outgoing="_h8IQwBkHEeucRrgbwoCGnw _tcGbwCf0EeuCt4IHth3d2Q">
+          <type href="../../sbsml/model/sbsml.ecore#//Connection"/>
+        </nodes>
+        <nodes xmi:id="_cuThABkHEeucRrgbwoCGnw" incoming="_gR_DIBkHEeucRrgbwoCGnw" outgoing="_iYk8MBkHEeucRrgbwoCGnw _tDUIUCf0EeuCt4IHth3d2Q">
+          <type href="../../sbsml/model/sbsml.ecore#//Connection"/>
+        </nodes>
+        <nodes xmi:id="_vATOgBkDEeucRrgbwoCGnw" outgoing="_gR_DIBkHEeucRrgbwoCGnw _gkdTMBkHEeucRrgbwoCGnw">
+          <type href="../../sbsml/model/sbsml.ecore#//Configuration"/>
+        </nodes>
+        <nodes xmi:id="_q2rRoCf0EeuCt4IHth3d2Q" incoming="_tDUIUCf0EeuCt4IHth3d2Q _tcGbwCf0EeuCt4IHth3d2Q">
+          <type href="../../sbsml/model/sbsml.ecore#//Node"/>
+        </nodes>
+        <edges xmi:id="_gR_DIBkHEeucRrgbwoCGnw" source="_vATOgBkDEeucRrgbwoCGnw" target="_cuThABkHEeucRrgbwoCGnw">
+          <type href="../../sbsml/model/sbsml.ecore#//Configuration/connections"/>
+        </edges>
+        <edges xmi:id="_gkdTMBkHEeucRrgbwoCGnw" source="_vATOgBkDEeucRrgbwoCGnw" target="_d0VU8BkHEeucRrgbwoCGnw">
+          <type href="../../sbsml/model/sbsml.ecore#//Configuration/connections"/>
+        </edges>
+        <edges xmi:id="_iYk8MBkHEeucRrgbwoCGnw" source="_cuThABkHEeucRrgbwoCGnw" target="_tATFoBkDEeucRrgbwoCGnw">
+          <type href="../../sbsml/model/sbsml.ecore#//Connection/portA"/>
+        </edges>
+        <edges xmi:id="_h8IQwBkHEeucRrgbwoCGnw" source="_d0VU8BkHEeucRrgbwoCGnw" target="_tATFoBkDEeucRrgbwoCGnw">
+          <type href="../../sbsml/model/sbsml.ecore#//Connection/portA"/>
+        </edges>
+        <edges xmi:id="_tDUIUCf0EeuCt4IHth3d2Q" source="_cuThABkHEeucRrgbwoCGnw" target="_q2rRoCf0EeuCt4IHth3d2Q">
+          <type href="../../sbsml/model/sbsml.ecore#//Connection/nodeA"/>
+        </edges>
+        <edges xmi:id="_tcGbwCf0EeuCt4IHth3d2Q" source="_d0VU8BkHEeucRrgbwoCGnw" target="_q2rRoCf0EeuCt4IHth3d2Q">
+          <type href="../../sbsml/model/sbsml.ecore#//Connection/nodeA"/>
+        </edges>
+      </lhs>
+      <rhs xmi:id="_Sre7wRkIEeucRrgbwoCGnw" name="Rhs">
+        <nodes xmi:id="_tAU60BkDEeucRrgbwoCGnw" incoming="_iYk8MRkHEeucRrgbwoCGnw _h8IQwRkHEeucRrgbwoCGnw">
+          <type href="../../sbsml/model/sbsml.ecore#//Port"/>
+          <attributes xmi:id="_jXYGwRkHEeucRrgbwoCGnw" value="false">
+            <type href="../../sbsml/model/sbsml.ecore#//Port/singleConnection"/>
+          </attributes>
+        </nodes>
+        <nodes xmi:id="_d0VU8RkHEeucRrgbwoCGnw" incoming="_gkdTMRkHEeucRrgbwoCGnw" outgoing="_h8IQwRkHEeucRrgbwoCGnw _tcGbwSf0EeuCt4IHth3d2Q">
+          <type href="../../sbsml/model/sbsml.ecore#//Connection"/>
+        </nodes>
+        <nodes xmi:id="_cuThARkHEeucRrgbwoCGnw" incoming="_gR_DIRkHEeucRrgbwoCGnw" outgoing="_iYk8MRkHEeucRrgbwoCGnw _tDUIUSf0EeuCt4IHth3d2Q">
+          <type href="../../sbsml/model/sbsml.ecore#//Connection"/>
+        </nodes>
+        <nodes xmi:id="_vATOgRkDEeucRrgbwoCGnw" outgoing="_gR_DIRkHEeucRrgbwoCGnw _gkdTMRkHEeucRrgbwoCGnw">
+          <type href="../../sbsml/model/sbsml.ecore#//Configuration"/>
+        </nodes>
+        <nodes xmi:id="_q2u8ACf0EeuCt4IHth3d2Q" incoming="_tDUIUSf0EeuCt4IHth3d2Q _tcGbwSf0EeuCt4IHth3d2Q">
+          <type href="../../sbsml/model/sbsml.ecore#//Node"/>
+        </nodes>
+        <edges xmi:id="_gR_DIRkHEeucRrgbwoCGnw" source="_vATOgRkDEeucRrgbwoCGnw" target="_cuThARkHEeucRrgbwoCGnw">
+          <type href="../../sbsml/model/sbsml.ecore#//Configuration/connections"/>
+        </edges>
+        <edges xmi:id="_gkdTMRkHEeucRrgbwoCGnw" source="_vATOgRkDEeucRrgbwoCGnw" target="_d0VU8RkHEeucRrgbwoCGnw">
+          <type href="../../sbsml/model/sbsml.ecore#//Configuration/connections"/>
+        </edges>
+        <edges xmi:id="_iYk8MRkHEeucRrgbwoCGnw" source="_cuThARkHEeucRrgbwoCGnw" target="_tAU60BkDEeucRrgbwoCGnw">
+          <type href="../../sbsml/model/sbsml.ecore#//Connection/portA"/>
+        </edges>
+        <edges xmi:id="_h8IQwRkHEeucRrgbwoCGnw" source="_d0VU8RkHEeucRrgbwoCGnw" target="_tAU60BkDEeucRrgbwoCGnw">
+          <type href="../../sbsml/model/sbsml.ecore#//Connection/portA"/>
+        </edges>
+        <edges xmi:id="_tDUIUSf0EeuCt4IHth3d2Q" source="_cuThARkHEeucRrgbwoCGnw" target="_q2u8ACf0EeuCt4IHth3d2Q">
+          <type href="../../sbsml/model/sbsml.ecore#//Connection/nodeA"/>
+        </edges>
+        <edges xmi:id="_tcGbwSf0EeuCt4IHth3d2Q" source="_d0VU8RkHEeucRrgbwoCGnw" target="_q2u8ACf0EeuCt4IHth3d2Q">
+          <type href="../../sbsml/model/sbsml.ecore#//Connection/nodeA"/>
+        </edges>
+      </rhs>
+      <mappings xmi:id="_vATOghkDEeucRrgbwoCGnw" origin="_vATOgBkDEeucRrgbwoCGnw" image="_vATOgRkDEeucRrgbwoCGnw"/>
+      <mappings xmi:id="_cuThAhkHEeucRrgbwoCGnw" origin="_cuThABkHEeucRrgbwoCGnw" image="_cuThARkHEeucRrgbwoCGnw"/>
+      <mappings xmi:id="_d0VU8hkHEeucRrgbwoCGnw" origin="_d0VU8BkHEeucRrgbwoCGnw" image="_d0VU8RkHEeucRrgbwoCGnw"/>
+      <mappings xmi:id="_tAU60RkDEeucRrgbwoCGnw" origin="_tATFoBkDEeucRrgbwoCGnw" image="_tAU60BkDEeucRrgbwoCGnw"/>
+      <mappings xmi:id="_q2vjECf0EeuCt4IHth3d2Q" origin="_q2rRoCf0EeuCt4IHth3d2Q" image="_q2u8ACf0EeuCt4IHth3d2Q"/>
+    </multiRules>
+  </units>
+  <units xsi:type="henshin:Rule" xmi:id="_-PumEBkDEeucRrgbwoCGnw" name="RemoveUnusedSensorNodes">
+    <lhs xmi:id="_-Pv0MBkDEeucRrgbwoCGnw" name="Lhs"/>
+    <rhs xmi:id="_-Pv0MRkDEeucRrgbwoCGnw" name="Rhs"/>
+    <multiRules xmi:id="_5L1jgBkFEeucRrgbwoCGnw">
+      <lhs xmi:id="_5L1jgRkFEeucRrgbwoCGnw" name="Lhs">
+        <nodes xmi:id="_C-nXEBkEEeucRrgbwoCGnw" outgoing="_JTgckBkEEeucRrgbwoCGnw _v_tAkBkEEeucRrgbwoCGnw">
+          <type href="../../sbsml/model/sbsml.ecore#//Configuration"/>
+        </nodes>
+        <nodes xmi:id="_HCfcMBkEEeucRrgbwoCGnw" incoming="_JTgckBkEEeucRrgbwoCGnw">
+          <type href="../../sbsml/model/sbsml.ecore#//Controller"/>
+        </nodes>
+        <nodes xmi:id="_vVuPcBkEEeucRrgbwoCGnw" name="" incoming="_v_tAkBkEEeucRrgbwoCGnw" outgoing="_6zBHQBkGEeucRrgbwoCGnw">
+          <type href="../../sbsml/model/sbsml.ecore#//Node"/>
+        </nodes>
+        <nodes xmi:id="_8mBLYBkFEeucRrgbwoCGnw" name="" incoming="_6zBHQBkGEeucRrgbwoCGnw">
+          <type href="../../sbsml/model/sbsml.ecore#//Sensor"/>
+        </nodes>
+        <edges xmi:id="_JTgckBkEEeucRrgbwoCGnw" source="_C-nXEBkEEeucRrgbwoCGnw" target="_HCfcMBkEEeucRrgbwoCGnw">
+          <type href="../../sbsml/model/sbsml.ecore#//Configuration/controllers"/>
+        </edges>
+        <edges xmi:id="_v_tAkBkEEeucRrgbwoCGnw" source="_C-nXEBkEEeucRrgbwoCGnw" target="_vVuPcBkEEeucRrgbwoCGnw">
+          <type href="../../sbsml/model/sbsml.ecore#//Configuration/nodes"/>
+        </edges>
+        <edges xmi:id="_6zBHQBkGEeucRrgbwoCGnw" source="_vVuPcBkEEeucRrgbwoCGnw" target="_8mBLYBkFEeucRrgbwoCGnw">
+          <type href="../../sbsml/model/sbsml.ecore#//Node/thing"/>
+        </edges>
+        <formula xsi:type="henshin:Not" xmi:id="_AqqsmBkGEeucRrgbwoCGnw">
+          <child xsi:type="henshin:NestedCondition" xmi:id="_AqqsmRkGEeucRrgbwoCGnw">
+            <conclusion xmi:id="_AqqsmhkGEeucRrgbwoCGnw">
+              <nodes xmi:id="_AqqsmxkGEeucRrgbwoCGnw" outgoing="_AqrToBkGEeucRrgbwoCGnw _AqrToRkGEeucRrgbwoCGnw">
+                <type href="../../sbsml/model/sbsml.ecore#//Configuration"/>
+              </nodes>
+              <nodes xmi:id="_AqqsnRkGEeucRrgbwoCGnw" incoming="_AqrToBkGEeucRrgbwoCGnw" outgoing="_BZgvkBkGEeucRrgbwoCGnw">
+                <type href="../../sbsml/model/sbsml.ecore#//Controller"/>
+              </nodes>
+              <nodes xmi:id="_AqqsnxkGEeucRrgbwoCGnw" incoming="_AqrToRkGEeucRrgbwoCGnw _BuWXIBkGEeucRrgbwoCGnw">
+                <type href="../../sbsml/model/sbsml.ecore#//Node"/>
+              </nodes>
+              <nodes xmi:id="_AqqsoRkGEeucRrgbwoCGnw">
+                <type href="../../sbsml/model/sbsml.ecore#//Sensor"/>
+              </nodes>
+              <nodes xmi:id="_AqqskBkGEeucRrgbwoCGnw" incoming="_BZgvkBkGEeucRrgbwoCGnw" outgoing="_BuWXIBkGEeucRrgbwoCGnw">
+                <type href="../../sbsml/model/sbsml.ecore#//Threshold"/>
+              </nodes>
+              <edges xmi:id="_AqrToBkGEeucRrgbwoCGnw" source="_AqqsmxkGEeucRrgbwoCGnw" target="_AqqsnRkGEeucRrgbwoCGnw">
+                <type href="../../sbsml/model/sbsml.ecore#//Configuration/controllers"/>
+              </edges>
+              <edges xmi:id="_AqrToRkGEeucRrgbwoCGnw" source="_AqqsmxkGEeucRrgbwoCGnw" target="_AqqsnxkGEeucRrgbwoCGnw">
+                <type href="../../sbsml/model/sbsml.ecore#//Configuration/nodes"/>
+              </edges>
+              <edges xmi:id="_BZgvkBkGEeucRrgbwoCGnw" source="_AqqsnRkGEeucRrgbwoCGnw" target="_AqqskBkGEeucRrgbwoCGnw">
+                <type href="../../sbsml/model/sbsml.ecore#//Controller/threshold"/>
+              </edges>
+              <edges xmi:id="_BuWXIBkGEeucRrgbwoCGnw" source="_AqqskBkGEeucRrgbwoCGnw" target="_AqqsnxkGEeucRrgbwoCGnw">
+                <type href="../../sbsml/model/sbsml.ecore#//Threshold/source"/>
+              </edges>
+            </conclusion>
+            <mappings xmi:id="_AqqsnBkGEeucRrgbwoCGnw" origin="_C-nXEBkEEeucRrgbwoCGnw" image="_AqqsmxkGEeucRrgbwoCGnw"/>
+            <mappings xmi:id="_AqqsnhkGEeucRrgbwoCGnw" origin="_HCfcMBkEEeucRrgbwoCGnw" image="_AqqsnRkGEeucRrgbwoCGnw"/>
+            <mappings xmi:id="_AqqsoBkGEeucRrgbwoCGnw" origin="_vVuPcBkEEeucRrgbwoCGnw" image="_AqqsnxkGEeucRrgbwoCGnw"/>
+            <mappings xmi:id="_AqqsohkGEeucRrgbwoCGnw" origin="_8mBLYBkFEeucRrgbwoCGnw" image="_AqqsoRkGEeucRrgbwoCGnw"/>
+          </child>
+        </formula>
+      </lhs>
+      <rhs xmi:id="_5L1jghkFEeucRrgbwoCGnw" name="Rhs">
+        <nodes xmi:id="_C-nXERkEEeucRrgbwoCGnw" outgoing="_JTgckRkEEeucRrgbwoCGnw">
+          <type href="../../sbsml/model/sbsml.ecore#//Configuration"/>
+        </nodes>
+        <nodes xmi:id="_HCfcMRkEEeucRrgbwoCGnw" incoming="_JTgckRkEEeucRrgbwoCGnw">
+          <type href="../../sbsml/model/sbsml.ecore#//Controller"/>
+        </nodes>
+        <nodes xmi:id="_8mDAkBkFEeucRrgbwoCGnw">
+          <type href="../../sbsml/model/sbsml.ecore#//Sensor"/>
+        </nodes>
+        <edges xmi:id="_JTgckRkEEeucRrgbwoCGnw" source="_C-nXERkEEeucRrgbwoCGnw" target="_HCfcMRkEEeucRrgbwoCGnw">
+          <type href="../../sbsml/model/sbsml.ecore#//Configuration/controllers"/>
+        </edges>
+      </rhs>
+      <mappings xmi:id="_C-nXEhkEEeucRrgbwoCGnw" origin="_C-nXEBkEEeucRrgbwoCGnw" image="_C-nXERkEEeucRrgbwoCGnw"/>
+      <mappings xmi:id="_HCfcMhkEEeucRrgbwoCGnw" origin="_HCfcMBkEEeucRrgbwoCGnw" image="_HCfcMRkEEeucRrgbwoCGnw"/>
+      <mappings xmi:id="_8mDAkRkFEeucRrgbwoCGnw" origin="_8mBLYBkFEeucRrgbwoCGnw" image="_8mDAkBkFEeucRrgbwoCGnw"/>
+    </multiRules>
+  </units>
+  <units xsi:type="henshin:SequentialUnit" xmi:id="_oZ4rcBkUEeuvX5cwavdWAg" name="DuplicateFogNodeAndMoveController" subUnits="_xqG9YA_DEeuCT55zbzDzfA _7tN9UBkUEeuvX5cwavdWAg">
+    <parameters xmi:id="_zq6TwBkUEeuvX5cwavdWAg" name="nodeName" kind="IN">
+      <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </parameters>
+    <parameters xmi:id="_poQH8Cf6EeuCt4IHth3d2Q" name="duplicateName" kind="IN">
+      <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </parameters>
+    <parameters xmi:id="_zq6TwRkUEeuvX5cwavdWAg" name="controllerName" kind="IN">
+      <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </parameters>
+    <parameterMappings xmi:id="_srFm0Cf6EeuCt4IHth3d2Q" source="_zq6TwBkUEeuvX5cwavdWAg" target="_K2dmoBkQEeucRrgbwoCGnw"/>
+    <parameterMappings xmi:id="_srFm0Sf6EeuCt4IHth3d2Q" source="_K2dmoBkQEeucRrgbwoCGnw" target="_zq6TwBkUEeuvX5cwavdWAg"/>
+    <parameterMappings xmi:id="_srFm0if6EeuCt4IHth3d2Q" source="_poQH8Cf6EeuCt4IHth3d2Q" target="_ledoECf6EeuCt4IHth3d2Q"/>
+    <parameterMappings xmi:id="_srFm0yf6EeuCt4IHth3d2Q" source="_ledoECf6EeuCt4IHth3d2Q" target="_poQH8Cf6EeuCt4IHth3d2Q"/>
+    <parameterMappings xmi:id="_x0ES0Cf6EeuCt4IHth3d2Q" source="_poQH8Cf6EeuCt4IHth3d2Q" target="_-NOmgBkVEeuvX5cwavdWAg"/>
+    <parameterMappings xmi:id="_x0Fg8Cf6EeuCt4IHth3d2Q" source="_-NOmgBkVEeuvX5cwavdWAg" target="_poQH8Cf6EeuCt4IHth3d2Q"/>
+    <parameterMappings xmi:id="_x0Fg8Sf6EeuCt4IHth3d2Q" source="_zq6TwRkUEeuvX5cwavdWAg" target="__S8G0RkUEeuvX5cwavdWAg"/>
+    <parameterMappings xmi:id="_x0Fg8if6EeuCt4IHth3d2Q" source="__S8G0RkUEeuvX5cwavdWAg" target="_zq6TwRkUEeuvX5cwavdWAg"/>
+  </units>
+  <units xsi:type="henshin:Rule" xmi:id="_7tN9UBkUEeuvX5cwavdWAg" name="MoveController">
+    <parameters xmi:id="_-NOmgBkVEeuvX5cwavdWAg" name="nodeName" kind="IN">
+      <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </parameters>
+    <parameters xmi:id="__S8G0RkUEeuvX5cwavdWAg" name="controllerName" kind="IN">
+      <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </parameters>
+    <lhs xmi:id="_7tPLcBkUEeuvX5cwavdWAg" name="Lhs">
+      <nodes xmi:id="_FPF8MBkVEeuvX5cwavdWAg" outgoing="_0zLfYEBQEeu6Ctlv-LAL8g">
+        <type href="../../sbsml/model/sbsml.ecore#//Node"/>
+        <attributes xmi:id="_HSUYMBkVEeuvX5cwavdWAg" value="nodeName">
+          <type href="../../sbsml/model/sbsml.ecore#//NamedElement/name"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="_F0nEEBkVEeuvX5cwavdWAg">
+        <type href="../../sbsml/model/sbsml.ecore#//Controller"/>
+        <attributes xmi:id="_LZGnYBkVEeuvX5cwavdWAg" value="controllerName">
+          <type href="../../sbsml/model/sbsml.ecore#//NamedElement/name"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="_0AxLAEBQEeu6Ctlv-LAL8g" incoming="_0zLfYEBQEeu6Ctlv-LAL8g">
+        <type href="../../sbsml/model/sbsml.ecore#//FogDevice"/>
+      </nodes>
+      <edges xmi:id="_0zLfYEBQEeu6Ctlv-LAL8g" source="_FPF8MBkVEeuvX5cwavdWAg" target="_0AxLAEBQEeu6Ctlv-LAL8g">
+        <type href="../../sbsml/model/sbsml.ecore#//Node/thing"/>
+      </edges>
+    </lhs>
+    <rhs xmi:id="_7tPLcRkUEeuvX5cwavdWAg" name="Rhs">
+      <nodes xmi:id="_FPF8MRkVEeuvX5cwavdWAg" incoming="_NHjGMBkVEeuvX5cwavdWAg" outgoing="_0zLfYUBQEeu6Ctlv-LAL8g">
+        <type href="../../sbsml/model/sbsml.ecore#//Node"/>
+        <attributes xmi:id="_HSUYMRkVEeuvX5cwavdWAg" value="nodeName">
+          <type href="../../sbsml/model/sbsml.ecore#//NamedElement/name"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="_F0nEERkVEeuvX5cwavdWAg" outgoing="_NHjGMBkVEeuvX5cwavdWAg">
+        <type href="../../sbsml/model/sbsml.ecore#//Controller"/>
+        <attributes xmi:id="_LZGnYRkVEeuvX5cwavdWAg" value="controllerName">
+          <type href="../../sbsml/model/sbsml.ecore#//NamedElement/name"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="_0AxLAUBQEeu6Ctlv-LAL8g" incoming="_0zLfYUBQEeu6Ctlv-LAL8g">
+        <type href="../../sbsml/model/sbsml.ecore#//FogDevice"/>
+      </nodes>
+      <edges xmi:id="_NHjGMBkVEeuvX5cwavdWAg" source="_F0nEERkVEeuvX5cwavdWAg" target="_FPF8MRkVEeuvX5cwavdWAg">
+        <type href="../../sbsml/model/sbsml.ecore#//Controller/computationNode"/>
+      </edges>
+      <edges xmi:id="_0zLfYUBQEeu6Ctlv-LAL8g" source="_FPF8MRkVEeuvX5cwavdWAg" target="_0AxLAUBQEeu6Ctlv-LAL8g">
+        <type href="../../sbsml/model/sbsml.ecore#//Node/thing"/>
+      </edges>
+    </rhs>
+    <mappings xmi:id="_FPF8MhkVEeuvX5cwavdWAg" origin="_FPF8MBkVEeuvX5cwavdWAg" image="_FPF8MRkVEeuvX5cwavdWAg"/>
+    <mappings xmi:id="_F0nEEhkVEeuvX5cwavdWAg" origin="_F0nEEBkVEeuvX5cwavdWAg" image="_F0nEERkVEeuvX5cwavdWAg"/>
+    <mappings xmi:id="_0AxLAkBQEeu6Ctlv-LAL8g" origin="_0AxLAEBQEeu6Ctlv-LAL8g" image="_0AxLAUBQEeu6Ctlv-LAL8g"/>
+  </units>
+</henshin:Module>

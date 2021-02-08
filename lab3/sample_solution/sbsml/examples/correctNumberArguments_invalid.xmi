@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sbsml:SmartSystem
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:sbsml="http://big.tuwien.ac.at/sbsml"
+    xsi:schemaLocation="http://big.tuwien.ac.at/sbsml ../model/sbsml.ecore"
+    name="Smart Indoor Farming System">
+  <things xsi:type="sbsml:Sensor"
+      name="HumiditySensor"
+      shortName="HS">
+    <ports name="HS_GPIO"/>
+    <parameters
+        name="humidity"
+        unit="Percent"/>
+  </things>
+  <things xsi:type="sbsml:Sensor"
+      name="LightSensor"
+      shortName="LS">
+    <ports name="LS_GPIO"/>
+    <parameters
+        name="brightness"
+        unit="Lumen"/>
+  </things>
+  <things xsi:type="sbsml:Actuator"
+      name="WateringValve"
+      shortName="WV">
+    <ports name="WV_GPIO"/>
+    <services
+        name="waterPlant">
+      <parameters
+          name="duration"
+          unit="Second"/>
+    </services>
+  </things>
+  <things xsi:type="sbsml:Actuator"
+      name="Lamp"
+      shortName="L">
+    <ports name="L_GPIO"/>
+    <services
+        name="turnOn"/>
+    <services
+        name="turnOff"/>
+  </things>
+  <things xsi:type="sbsml:FogDevice"
+      name="RaspberryPi"
+      shortName="RPI"
+      mips="10000">
+    <ports name="RPI_GPIO_1"/>
+    <ports name="RPI_GPIO_2"/>
+    <ports name="RPI_GPIO_3"/>
+    <ports name="RPI_GPIO_4"/>
+  </things>
+  <units name="Percent"
+      type="FLOAT"
+      abbreviation="%"/>
+  <units name="Lumen"
+      abbreviation="lu"/>
+  <units name="Second"
+      abbreviation="sec"/>
+  <configs name="Basil">
+    <nodes name="BasilHS"
+        thing="HumiditySensor"/>
+    <nodes name="BasilLS"
+        thing="LightSensor"/>
+    <nodes name="BasilWV"
+        thing="WateringValve"/>
+    <nodes name="BasilLamp"
+        thing="Lamp"/>
+    <nodes name="BasilRPI"
+        thing="RaspberryPi"/>
+    <connections
+        portB="HS_GPIO"
+        portA="RPI_GPIO_1"
+        nodeA="BasilRPI"
+        nodeB="BasilHS"/>
+    <connections
+        portB="LS_GPIO"
+        portA="RPI_GPIO_2"
+        nodeA="BasilRPI"
+        nodeB="BasilLS"/>
+    <connections
+        portB="WV_GPIO"
+        portA="RPI_GPIO_3"
+        nodeA="BasilRPI"
+        nodeB="BasilWV"/>
+    <connections
+        portB="L_GPIO"
+        portA="RPI_GPIO_4"
+        nodeA="BasilRPI"
+        nodeB="BasilLamp"/>
+    <controllers
+        name="LowHumidityController"
+        mips="500"
+        computationNode="BasilRPI">
+      <threshold
+          xsi:type="sbsml:FloatThreshold"
+          source="BasilHS"
+          parameter="humidity"
+          value="0.8"
+          comperator="SMALLER"/>
+      <servicecalls
+          service="waterPlant"
+          node="BasilWV"/>
+    </controllers>
+    <controllers
+        name="SunShineController"
+        mips="300"
+        computationNode="BasilRPI">
+      <threshold
+          xsi:type="sbsml:IntThreshold"
+          source="BasilLS"
+          parameter="brightness"
+          value="100"/>
+      <servicecalls
+          service="turnOff"
+          node="BasilLamp"/>
+    </controllers>
+    <controllers
+        name="DarknessController"
+        mips="300"
+        computationNode="BasilRPI">
+      <threshold
+          xsi:type="sbsml:IntThreshold"
+          source="BasilLS"
+          parameter="brightness"
+          value="100"
+          comperator="SMALLER"/>
+      <servicecalls
+          service="turnOn"
+          node="BasilLamp"/>
+    </controllers>
+  </configs>
+</sbsml:SmartSystem>

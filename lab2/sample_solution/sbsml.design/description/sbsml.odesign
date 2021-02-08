@@ -1,0 +1,636 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<description:Group xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:properties="http://www.eclipse.org/sirius/properties/1.0.0" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:tool="http://www.eclipse.org/sirius/diagram/description/tool/1.1.0" xmlns:tool_1="http://www.eclipse.org/sirius/description/tool/1.1.0" name="sbsml" version="12.0.0.2017041100">
+  <ownedViewpoints documentation="TODO:&#xD;&#xA;  - Units&#xD;&#xA;  - MIPS&#xD;&#xA;" name="SystemViewpoint">
+    <ownedRepresentations xsi:type="description_1:DiagramDescription" name="SystemDiagram" label="System Diagram" initialisation="true" domainClass="sbsml::SmartSystem" enablePopupBars="true">
+      <metamodel href="../../sbsml/model/sbsml.ecore#/"/>
+      <defaultLayer name="Default">
+        <nodeMappings name="Unit" semanticCandidatesExpression="feature:eAllContents" domainClass="sbsml::Unit">
+          <style xsi:type="style:SquareDescription" labelSize="12" labelExpression="[self.name + ': ' + self.type /]" iconPath="/sbsml.design/img/icons/unit.png" labelAlignment="LEFT" labelPosition="node" resizeKind="NSEW" width="10" height="3">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_gray']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_gray']"/>
+          </style>
+        </nodeMappings>
+        <edgeMappings name="ComputationNode" sourceMapping="//@ownedViewpoints[name='SystemViewpoint']/@ownedRepresentations[name='SystemDiagram']/@defaultLayer/@containerMappings[name='Configuration']/@subContainerMappings[name='Controller']" targetMapping="//@ownedViewpoints[name='SystemViewpoint']/@ownedRepresentations[name='SystemDiagram']/@defaultLayer/@containerMappings[name='Configuration']/@subNodeMappings[name='Node']" targetFinderExpression="feature:computationNode">
+          <style sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription labelSize="12">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="Connection" sourceMapping="//@ownedViewpoints[name='SystemViewpoint']/@ownedRepresentations[name='SystemDiagram']/@defaultLayer/@containerMappings[name='Configuration']/@subNodeMappings[name='Node']" targetMapping="//@ownedViewpoints[name='SystemViewpoint']/@ownedRepresentations[name='SystemDiagram']/@defaultLayer/@containerMappings[name='Configuration']/@subNodeMappings[name='Node']" targetFinderExpression="aql:self.nodeB" sourceFinderExpression="aql:self.nodeA" domainClass="sbsml::Connection" useDomainElement="true">
+          <style targetArrow="NoDecoration" sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <centerLabelStyleDescription labelSize="12">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <containerMappings name="Sensor" semanticCandidatesExpression="feature:things" domainClass="sbsml::Sensor" childrenPresentation="List">
+          <subNodeMappings name="Ports" semanticCandidatesExpression="feature:ports" domainClass="sbsml::Port">
+            <style xsi:type="style:SquareDescription" labelSize="12" iconPath="/sbsml.design/img/icons/port.png" labelAlignment="LEFT" labelPosition="node" resizeKind="NSEW">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_green']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_green']"/>
+            </style>
+          </subNodeMappings>
+          <subNodeMappings name="Parameters" semanticCandidatesExpression="feature:parameters" domainClass="sbsml::Parameter">
+            <style xsi:type="style:SquareDescription" labelSize="12" labelExpression="aql:self.name + ': ' + self.unit.name" iconPath="/sbsml.design/img/icons/parameter.png" labelAlignment="LEFT" labelPosition="node" resizeKind="NSEW">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_green']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_green']"/>
+            </style>
+          </subNodeMappings>
+          <style xsi:type="style:FlatContainerStyleDescription" borderSizeComputationExpression="1" labelSize="12" labelExpression="aql: self.name + '(' + self.shortName + ')'" iconPath="/sbsml.design/img/icons/sensor.png" widthComputationExpression="10" heightComputationExpression="10">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_blue']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_blue']"/>
+            <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_blue']"/>
+          </style>
+        </containerMappings>
+        <containerMappings name="Actuator" semanticCandidatesExpression="feature:things" domainClass="sbsml::Actuator" childrenPresentation="List">
+          <subNodeMappings name="Ports" semanticCandidatesExpression="feature:ports" domainClass="sbsml::Port">
+            <style xsi:type="style:SquareDescription" labelSize="12" iconPath="/sbsml.design/img/icons/port.png" labelAlignment="LEFT" labelPosition="node" resizeKind="NSEW">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_red']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_red']"/>
+            </style>
+          </subNodeMappings>
+          <subNodeMappings name="Service" semanticCandidatesExpression="feature:eAllContents" domainClass="sbsml::Service">
+            <style xsi:type="style:SquareDescription" labelSize="12" labelExpression="aql:self.name + '(' + self.parameters->collect(p|p.name + ':' + p.unit.name)->sep(', ') +')'" iconPath="/sbsml.design/img/icons/service.png" labelAlignment="LEFT" labelPosition="node" resizeKind="NSEW">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            </style>
+          </subNodeMappings>
+          <style xsi:type="style:FlatContainerStyleDescription" borderSizeComputationExpression="1" labelSize="12" labelExpression="aql: self.name + '(' + self.shortName + ')'" iconPath="/sbsml.design/img/icons/actuator.png" widthComputationExpression="10" heightComputationExpression="10">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_red']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_red']"/>
+            <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_red']"/>
+          </style>
+        </containerMappings>
+        <containerMappings name="FogDevice" semanticCandidatesExpression="feature:things" domainClass="sbsml::FogDevice" childrenPresentation="List">
+          <subNodeMappings name="Ports" semanticCandidatesExpression="feature:ports" domainClass="sbsml::Port">
+            <style xsi:type="style:SquareDescription" labelSize="12" iconPath="/sbsml.design/img/icons/port.png" labelAlignment="LEFT" labelPosition="node" resizeKind="NSEW">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_green']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_green']"/>
+            </style>
+          </subNodeMappings>
+          <style xsi:type="style:FlatContainerStyleDescription" borderSizeComputationExpression="1" labelSize="12" labelExpression="aql: self.name + '(' + self.shortName + ')'" iconPath="/sbsml.design/img/icons/fogdevice.png" widthComputationExpression="10" heightComputationExpression="10">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_green']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_green']"/>
+            <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_green']"/>
+          </style>
+        </containerMappings>
+        <containerMappings name="Configuration" semanticCandidatesExpression="feature:configs" domainClass="sbsml::Configuration">
+          <subNodeMappings name="Node" semanticCandidatesExpression="feature:eAllContents" domainClass="sbsml::Node">
+            <borderedNodeMappings name="NodePort" semanticCandidatesExpression="aql:self.thing.ports" domainClass="sbsml::Port">
+              <style xsi:type="style:SquareDescription" labelSize="12" showIcon="false" labelExpression="" labelPosition="node" resizeKind="NSEW" width="1" height="1">
+                <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </style>
+            </borderedNodeMappings>
+            <style xsi:type="style:EllipseNodeDescription" labelSize="9" showIcon="false" labelExpression="aql:self.name + '(' + self.thing.shortName + ')'" sizeComputationExpression="5" labelPosition="node" resizeKind="NSEW">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_gray']"/>
+            </style>
+            <conditionnalStyles predicateExpression="aql:self.thing.oclIsTypeOf(sbsml::Actuator)">
+              <style xsi:type="style:EllipseNodeDescription" labelSize="9" showIcon="false" labelExpression="aql:self.name + '(' + self.thing.shortName + ')'" sizeComputationExpression="5" labelPosition="node" resizeKind="NSEW">
+                <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_red']"/>
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_red']"/>
+              </style>
+            </conditionnalStyles>
+            <conditionnalStyles predicateExpression="aql:self.thing.oclIsTypeOf(sbsml::Sensor)">
+              <style xsi:type="style:EllipseNodeDescription" labelSize="9" showIcon="false" labelExpression="aql:self.name + '(' + self.thing.shortName + ')'" sizeComputationExpression="5" labelPosition="node" resizeKind="NSEW">
+                <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_blue']"/>
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_blue']"/>
+              </style>
+            </conditionnalStyles>
+            <conditionnalStyles predicateExpression="aql:self.thing.oclIsTypeOf(sbsml::FogDevice)">
+              <style xsi:type="style:EllipseNodeDescription" labelSize="9" showIcon="false" labelExpression="aql:self.name + '(' + self.thing.shortName + ')'" sizeComputationExpression="5" labelPosition="node" resizeKind="NSEW">
+                <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_green']"/>
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_green']"/>
+              </style>
+            </conditionnalStyles>
+          </subNodeMappings>
+          <subContainerMappings name="Controller" semanticCandidatesExpression="feature:eAllContents" domainClass="sbsml::Controller" childrenPresentation="List">
+            <subNodeMappings name="IntThreshold" semanticCandidatesExpression="feature:eAllContents" domainClass="sbsml::IntThreshold">
+              <style xsi:type="style:SquareDescription" labelSize="9" labelExpression="aql:self.source.name + '.' + self.parameter.name + if self.comperator = sbsml::Comparator::SMALLER then ' &lt; ' else ' > ' endif + self.value" iconPath="/sbsml.design/img/icons/threshold.png" labelAlignment="LEFT" labelPosition="node" resizeKind="NSEW">
+                <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+              </style>
+            </subNodeMappings>
+            <subNodeMappings name="FloatThreshold" semanticCandidatesExpression="feature:eAllContents" domainClass="sbsml::FloatThreshold">
+              <style xsi:type="style:SquareDescription" labelSize="9" labelExpression="aql:self.source.name + '.' + self.parameter.name + if self.comperator = sbsml::Comparator::SMALLER then ' &lt; ' else ' > ' endif + self.value" iconPath="/sbsml.design/img/icons/threshold.png" labelAlignment="LEFT" labelPosition="node" resizeKind="NSEW">
+                <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+              </style>
+            </subNodeMappings>
+            <subNodeMappings name="BoolThreshold" semanticCandidatesExpression="feature:eAllContents" domainClass="sbsml::BoolThreshold">
+              <style xsi:type="style:SquareDescription" labelSize="9" labelExpression="aql:self.source.name + '.' + self.parameter.name + ' = ' + self.triggerOn" iconPath="/sbsml.design/img/icons/threshold.png" labelAlignment="LEFT" labelPosition="node" resizeKind="NSEW">
+                <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+              </style>
+            </subNodeMappings>
+            <subNodeMappings name="ServiceCall" semanticCandidatesExpression="feature:eAllContents" domainClass="sbsml::ServiceCall">
+              <style xsi:type="style:EllipseNodeDescription" labelSize="9" labelExpression="[self.node.name + '.' + self.service.name + '(' + self.arguments->iterate(e; str:String=''|str + e.stringValue + if e=self.arguments->last() then '' else ', ' endif) + ')' /]" iconPath="/sbsml.design/img/icons/service.png" labelAlignment="LEFT" labelPosition="node" resizeKind="NSEW">
+                <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+              </style>
+            </subNodeMappings>
+            <style xsi:type="style:FlatContainerStyleDescription" borderSizeComputationExpression="2" borderLineStyle="dot" labelSize="12" showIcon="false" labelExpression="aql:self.name" labelAlignment="LEFT" widthComputationExpression="5" heightComputationExpression="4">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_gray']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+              <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+            </style>
+          </subContainerMappings>
+          <style xsi:type="style:FlatContainerStyleDescription" borderSizeComputationExpression="3" borderLineStyle="dash" labelSize="12" iconPath="/sbsml.design/img/icons/configuration.png" widthComputationExpression="15" heightComputationExpression="15">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_blue']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+            <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+          </style>
+        </containerMappings>
+        <toolSections name="UnitTools" label="Unit Tools">
+          <ownedTools xsi:type="tool:NodeCreationDescription" name="CreateUnit" label="Add Unit" nodeMappings="//@ownedViewpoints[name='SystemViewpoint']/@ownedRepresentations[name='SystemDiagram']/@defaultLayer/@nodeMappings[name='Unit']" iconPath="/sbsml.design/img/icons/unit.png">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="sbsml::Unit" referenceName="units"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+        </toolSections>
+        <toolSections name="ThingTools" label="Thing Tools">
+          <ownedTools xsi:type="tool:ContainerCreationDescription" name="CreateSensor" label="Add Sensor" containerMappings="//@ownedViewpoints[name='SystemViewpoint']/@ownedRepresentations[name='SystemDiagram']/@defaultLayer/@containerMappings[name='Sensor']" iconPath="/sbsml.design/img/icons/sensor.png">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="sbsml::Sensor" referenceName="things"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:ContainerCreationDescription" name="CreateActuator" label="Add Actuator" containerMappings="//@ownedViewpoints[name='SystemViewpoint']/@ownedRepresentations[name='SystemDiagram']/@defaultLayer/@containerMappings[name='Actuator']" iconPath="/sbsml.design/img/icons/actuator.png">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="sbsml::Actuator" referenceName="things"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:ContainerCreationDescription" name="CreateFogDevice" label="Add FogDevice" containerMappings="//@ownedViewpoints[name='SystemViewpoint']/@ownedRepresentations[name='SystemDiagram']/@defaultLayer/@containerMappings[name='FogDevice']" iconPath="/sbsml.design/img/icons/fogdevice.png">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="sbsml::FogDevice" referenceName="things"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:NodeCreationDescription" name="CreatePort" label="Add Port" nodeMappings="//@ownedViewpoints[name='SystemViewpoint']/@ownedRepresentations[name='SystemDiagram']/@defaultLayer/@containerMappings[name='Actuator']/@subNodeMappings[name='Ports'] //@ownedViewpoints[name='SystemViewpoint']/@ownedRepresentations[name='SystemDiagram']/@defaultLayer/@containerMappings[name='FogDevice']/@subNodeMappings[name='Ports'] //@ownedViewpoints[name='SystemViewpoint']/@ownedRepresentations[name='SystemDiagram']/@defaultLayer/@containerMappings[name='Sensor']/@subNodeMappings[name='Ports']" iconPath="/sbsml.design/img/icons/port.png">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="sbsml::Port" referenceName="ports">
+                  <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:instance">
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="singleConnection" valueExpression="true"/>
+                  </subModelOperations>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:NodeCreationDescription" name="CreateSensorParam" label="Add Sensor Parameter" nodeMappings="//@ownedViewpoints[name='SystemViewpoint']/@ownedRepresentations[name='SystemDiagram']/@defaultLayer/@containerMappings[name='Sensor']/@subNodeMappings[name='Parameters']" iconPath="/sbsml.design/img/icons/parameter.png">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="sbsml::Parameter" referenceName="parameters">
+                  <subModelOperations xsi:type="properties:DialogModelOperation" titleExpression="New Parameter">
+                    <buttons labelExpression="Cancel" closeDialogOnClick="true" rollbackChangesOnClose="true">
+                      <initialOperation/>
+                    </buttons>
+                    <buttons labelExpression="OK" default="true" closeDialogOnClick="true">
+                      <initialOperation/>
+                    </buttons>
+                    <page name="Default Page" semanticCandidateExpression="var:self" groups="//@ownedViewpoints[name='SystemViewpoint']/@ownedRepresentations[name='SystemDiagram']/@defaultLayer/@toolSections.1/@ownedTools[name='CreateSensorParam']/@initialOperation/@firstModelOperations/@subModelOperations.0/@subModelOperations.0/@groups.0"/>
+                    <groups name="Default Group" labelExpression="Parameter" semanticCandidateExpression="var:self">
+                      <controls xsi:type="properties:TextDescription" name="SensorParamName" labelExpression="Name" valueExpression="aql:self.name">
+                        <initialOperation>
+                          <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:self">
+                            <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:newValue"/>
+                          </firstModelOperations>
+                        </initialOperation>
+                      </controls>
+                      <controls xsi:type="properties:SelectDescription" name="SensorParamUnit" labelExpression="Unit" valueExpression="feature:unit" candidatesExpression="aql:self.eContainer().eContainer().units" candidateDisplayExpression="aql:candidate.name">
+                        <initialOperation>
+                          <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:self">
+                            <subModelOperations xsi:type="tool_1:SetValue" featureName="unit" valueExpression="aql:newValue"/>
+                          </firstModelOperations>
+                        </initialOperation>
+                      </controls>
+                    </groups>
+                  </subModelOperations>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:NodeCreationDescription" name="CreateService" label="Add Service" nodeMappings="//@ownedViewpoints[name='SystemViewpoint']/@ownedRepresentations[name='SystemDiagram']/@defaultLayer/@containerMappings[name='Actuator']/@subNodeMappings[name='Service']" iconPath="/sbsml.design/img/icons/service.png">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="sbsml::Service" referenceName="services">
+                  <subModelOperations xsi:type="properties:DialogModelOperation" titleExpression="New Service">
+                    <buttons labelExpression="Cancel" closeDialogOnClick="true" rollbackChangesOnClose="true">
+                      <initialOperation/>
+                    </buttons>
+                    <buttons labelExpression="OK" default="true" closeDialogOnClick="true">
+                      <initialOperation/>
+                    </buttons>
+                    <page name="Default Page" semanticCandidateExpression="var:self" groups="//@ownedViewpoints[name='SystemViewpoint']/@ownedRepresentations[name='SystemDiagram']/@defaultLayer/@toolSections.1/@ownedTools[name='CreateService']/@initialOperation/@firstModelOperations/@subModelOperations.0/@subModelOperations.0/@groups.0"/>
+                    <groups name="Default Group" labelExpression="Service" semanticCandidateExpression="var:self">
+                      <controls xsi:type="properties:TextDescription" name="ServiceName" labelExpression="Name" valueExpression="feature:name">
+                        <initialOperation>
+                          <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:self">
+                            <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:newValue"/>
+                          </firstModelOperations>
+                        </initialOperation>
+                      </controls>
+                      <controls xsi:type="properties:ListDescription" name="ServiceParams" labelExpression="Parameters" valueExpression="feature:parameters" displayExpression="aql:value.name + ': ' + value.unit.name">
+                        <actions labelExpression="Add">
+                          <initialOperation>
+                            <firstModelOperations xsi:type="tool_1:CreateInstance" typeName="sbsml::Parameter" referenceName="parameters">
+                              <subModelOperations xsi:type="properties:DialogModelOperation" titleExpression="New Parameter">
+                                <buttons labelExpression="Cancel" closeDialogOnClick="true" rollbackChangesOnClose="true">
+                                  <initialOperation/>
+                                </buttons>
+                                <buttons labelExpression="OK" default="true" closeDialogOnClick="true">
+                                  <initialOperation/>
+                                </buttons>
+                                <page name="Default Page" semanticCandidateExpression="var:self" groups="//@ownedViewpoints[name='SystemViewpoint']/@ownedRepresentations[name='SystemDiagram']/@defaultLayer/@toolSections.1/@ownedTools[name='CreateService']/@initialOperation/@firstModelOperations/@subModelOperations.0/@subModelOperations.0/@groups.0/@controls.1/@actions.0/@initialOperation/@firstModelOperations/@subModelOperations.0/@groups.0"/>
+                                <groups name="Default Group" labelExpression="Parameter" semanticCandidateExpression="var:self">
+                                  <controls xsi:type="properties:TextDescription" name="ParamName" labelExpression="Name" valueExpression="feature:name">
+                                    <initialOperation>
+                                      <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:self">
+                                        <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:newValue"/>
+                                      </firstModelOperations>
+                                    </initialOperation>
+                                  </controls>
+                                  <controls xsi:type="properties:SelectDescription" name="ParamUnit" valueExpression="feature:unit" candidatesExpression="aql:self.eContainer().eContainer().eContainer().units" candidateDisplayExpression="aql:candidate.name">
+                                    <initialOperation>
+                                      <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:self">
+                                        <subModelOperations xsi:type="tool_1:SetValue" featureName="unit" valueExpression="aql:newValue"/>
+                                      </firstModelOperations>
+                                    </initialOperation>
+                                  </controls>
+                                </groups>
+                              </subModelOperations>
+                            </firstModelOperations>
+                          </initialOperation>
+                        </actions>
+                      </controls>
+                    </groups>
+                  </subModelOperations>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+        </toolSections>
+        <toolSections name="ControllerTools" label="Controller Tools">
+          <ownedTools xsi:type="tool:ContainerCreationDescription" name="CreateController" label="Add Controller" containerMappings="//@ownedViewpoints[name='SystemViewpoint']/@ownedRepresentations[name='SystemDiagram']/@defaultLayer/@containerMappings[name='Configuration']/@subContainerMappings[name='Controller']" iconPath="/sbsml.design/img/icons/mips.png">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="sbsml::Controller" referenceName="controllers"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:EdgeCreationDescription" name="SetComputationNode" label="Set Computation Node" elementsToSelect="aql:self.eContent().nodes->select(n|n.thing.oclIsTypeOf(sbsbml::FogDevice))" edgeMappings="//@ownedViewpoints[name='SystemViewpoint']/@ownedRepresentations[name='SystemDiagram']/@defaultLayer/@edgeMappings[name='ComputationNode']" iconPath="/sbsml.design/img/icons/mips.png">
+            <sourceVariable name="source"/>
+            <targetVariable name="target"/>
+            <sourceViewVariable name="sourceView"/>
+            <targetViewVariable name="targetView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:source">
+                <subModelOperations xsi:type="tool_1:SetValue" featureName="computationNode" valueExpression="var:target"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:NodeCreationDescription" name="CreateIntThreshold" label="Add IntThreshold" nodeMappings="//@ownedViewpoints[name='SystemViewpoint']/@ownedRepresentations[name='SystemDiagram']/@defaultLayer/@containerMappings[name='Configuration']/@subContainerMappings[name='Controller']/@subNodeMappings[name='IntThreshold']" iconPath="/sbsml.design/img/icons/threshold.png">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="sbsml::IntThreshold" referenceName="threshold">
+                  <subModelOperations xsi:type="properties:DialogModelOperation" titleExpression="New IntThreshold">
+                    <buttons labelExpression="Cancel" closeDialogOnClick="true" rollbackChangesOnClose="true">
+                      <initialOperation/>
+                    </buttons>
+                    <buttons labelExpression="OK" default="true" closeDialogOnClick="true">
+                      <initialOperation/>
+                    </buttons>
+                    <page name="Default Page" semanticCandidateExpression="var:self" groups="//@ownedViewpoints[name='SystemViewpoint']/@ownedRepresentations[name='SystemDiagram']/@defaultLayer/@toolSections.2/@ownedTools[name='CreateIntThreshold']/@initialOperation/@firstModelOperations/@subModelOperations.0/@subModelOperations.0/@groups.0"/>
+                    <groups name="Default Group" labelExpression="Threshold" semanticCandidateExpression="var:self">
+                      <controls xsi:type="properties:SelectDescription" name="IntThresholdSource" labelExpression="Source Node" valueExpression="feature:source" candidatesExpression="aql:self.eContainer().eContainer().nodes->select(n|n.thing.parameters->exists(p|p.unit.type=sbsml::DataType::INT))" candidateDisplayExpression="aql:candidate.name">
+                        <initialOperation>
+                          <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:self">
+                            <subModelOperations xsi:type="tool_1:SetValue" featureName="source" valueExpression="aql:newValue"/>
+                          </firstModelOperations>
+                        </initialOperation>
+                      </controls>
+                      <controls xsi:type="properties:SelectDescription" name="IntThresholdParameter" labelExpression="Parameter" valueExpression="feature:parameter" candidatesExpression="aql:self.source.thing.parameters->select(p|p.unit.type=sbsml::DataType::INT)" candidateDisplayExpression="aql:candidate.name">
+                        <initialOperation>
+                          <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:self">
+                            <subModelOperations xsi:type="tool_1:SetValue" featureName="parameter" valueExpression="aql:newValue"/>
+                          </firstModelOperations>
+                        </initialOperation>
+                      </controls>
+                    </groups>
+                  </subModelOperations>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:NodeCreationDescription" name="CreateFloatThreshold" label="Add FloatThreshold" nodeMappings="//@ownedViewpoints[name='SystemViewpoint']/@ownedRepresentations[name='SystemDiagram']/@defaultLayer/@containerMappings[name='Configuration']/@subContainerMappings[name='Controller']/@subNodeMappings[name='FloatThreshold']" iconPath="/sbsml.design/img/icons/threshold.png">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="sbsml::FloatThreshold" referenceName="threshold">
+                  <subModelOperations xsi:type="properties:DialogModelOperation" titleExpression="New FloatThreshold">
+                    <buttons labelExpression="Cancel" closeDialogOnClick="true" rollbackChangesOnClose="true">
+                      <initialOperation/>
+                    </buttons>
+                    <buttons labelExpression="OK" default="true" closeDialogOnClick="true">
+                      <initialOperation/>
+                    </buttons>
+                    <page name="Default Page" semanticCandidateExpression="var:self" groups="//@ownedViewpoints[name='SystemViewpoint']/@ownedRepresentations[name='SystemDiagram']/@defaultLayer/@toolSections.2/@ownedTools[name='CreateFloatThreshold']/@initialOperation/@firstModelOperations/@subModelOperations.0/@subModelOperations.0/@groups.0"/>
+                    <groups name="Default Group" labelExpression="Threshold" semanticCandidateExpression="var:self">
+                      <controls xsi:type="properties:SelectDescription" name="FloatThresholdSource" labelExpression="Source Node" valueExpression="feature:source" candidatesExpression="aql:self.eContainer().eContainer().nodes->select(n|n.thing.parameters->exists(p|p.unit.type=sbsml::DataType::FLOAT))" candidateDisplayExpression="aql:candidate.name">
+                        <initialOperation>
+                          <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:self">
+                            <subModelOperations xsi:type="tool_1:SetValue" featureName="source" valueExpression="aql:newValue"/>
+                          </firstModelOperations>
+                        </initialOperation>
+                      </controls>
+                      <controls xsi:type="properties:SelectDescription" name="FloatThresholdParameter" labelExpression="Parameter" valueExpression="feature:parameter" candidatesExpression="aql:self.source.thing.parameters->select(p|p.unit.type=sbsml::DataType::FLOAT)" candidateDisplayExpression="aql:candidate.name">
+                        <initialOperation>
+                          <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:self">
+                            <subModelOperations xsi:type="tool_1:SetValue" featureName="parameter" valueExpression="aql:newValue"/>
+                          </firstModelOperations>
+                        </initialOperation>
+                      </controls>
+                    </groups>
+                  </subModelOperations>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:NodeCreationDescription" name="CreateBoolThreshold" label="Add BoolThreshold" nodeMappings="//@ownedViewpoints[name='SystemViewpoint']/@ownedRepresentations[name='SystemDiagram']/@defaultLayer/@containerMappings[name='Configuration']/@subContainerMappings[name='Controller']/@subNodeMappings[name='BoolThreshold']" iconPath="/sbsml.design/img/icons/threshold.png">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="sbsml::BoolThreshold" referenceName="threshold">
+                  <subModelOperations xsi:type="properties:DialogModelOperation" titleExpression="New BoolThreshold">
+                    <buttons labelExpression="Cancel" closeDialogOnClick="true" rollbackChangesOnClose="true">
+                      <initialOperation/>
+                    </buttons>
+                    <buttons labelExpression="OK" default="true" closeDialogOnClick="true">
+                      <initialOperation/>
+                    </buttons>
+                    <page name="Default Page" semanticCandidateExpression="var:self" groups="//@ownedViewpoints[name='SystemViewpoint']/@ownedRepresentations[name='SystemDiagram']/@defaultLayer/@toolSections.2/@ownedTools[name='CreateBoolThreshold']/@initialOperation/@firstModelOperations/@subModelOperations.0/@subModelOperations.0/@groups.0"/>
+                    <groups name="Default Group" labelExpression="Threshold" semanticCandidateExpression="var:self">
+                      <controls xsi:type="properties:SelectDescription" name="BoolThresholdSource" labelExpression="Source Node" valueExpression="feature:source" candidatesExpression="aql:self.eContainer().eContainer().nodes->select(n|n.thing.parameters->exists(p|p.unit.type=sbsml::DataType::BOOL))" candidateDisplayExpression="aql:candidate.name">
+                        <initialOperation>
+                          <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:self">
+                            <subModelOperations xsi:type="tool_1:SetValue" featureName="source" valueExpression="aql:newValue"/>
+                          </firstModelOperations>
+                        </initialOperation>
+                      </controls>
+                      <controls xsi:type="properties:SelectDescription" name="BoolThresholdParameter" labelExpression="Parameter" valueExpression="feature:parameter" candidatesExpression="aql:self.source.thing.parameters->select(p|p.unit.type=sbsml::DataType::BOOL)" candidateDisplayExpression="aql:candidate.name">
+                        <initialOperation>
+                          <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:self">
+                            <subModelOperations xsi:type="tool_1:SetValue" featureName="parameter" valueExpression="aql:newValue"/>
+                          </firstModelOperations>
+                        </initialOperation>
+                      </controls>
+                    </groups>
+                  </subModelOperations>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:NodeCreationDescription" name="CreateServiceCall" label="Add ServiceCall" nodeMappings="//@ownedViewpoints[name='SystemViewpoint']/@ownedRepresentations[name='SystemDiagram']/@defaultLayer/@containerMappings[name='Configuration']/@subContainerMappings[name='Controller']/@subNodeMappings[name='ServiceCall']" iconPath="/sbsml.design/img/icons/service.png">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="sbsml::ServiceCall" referenceName="servicecalls" variableName="serviceCallInstance">
+                  <subModelOperations xsi:type="properties:DialogModelOperation" titleExpression="New ServiceCall">
+                    <buttons labelExpression="Cancel" closeDialogOnClick="true" rollbackChangesOnClose="true">
+                      <initialOperation/>
+                    </buttons>
+                    <buttons labelExpression="OK" default="true" closeDialogOnClick="true">
+                      <initialOperation/>
+                    </buttons>
+                    <page name="Default Page" semanticCandidateExpression="var:self" groups="//@ownedViewpoints[name='SystemViewpoint']/@ownedRepresentations[name='SystemDiagram']/@defaultLayer/@toolSections.2/@ownedTools[name='CreateServiceCall']/@initialOperation/@firstModelOperations/@subModelOperations.0/@subModelOperations.0/@groups.0"/>
+                    <groups name="Default Group" labelExpression="ServiceCall" semanticCandidateExpression="var:self">
+                      <controls xsi:type="properties:SelectDescription" name="ServiceCallNode" labelExpression="Node" valueExpression="feature:node" candidatesExpression="aql:self.eContainer().eContainer().nodes->select(n|n.thing.services->size() > 0)" candidateDisplayExpression="aql:candidate.name">
+                        <initialOperation>
+                          <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:self">
+                            <subModelOperations xsi:type="tool_1:SetValue" featureName="node" valueExpression="aql:newValue"/>
+                          </firstModelOperations>
+                        </initialOperation>
+                      </controls>
+                      <controls xsi:type="properties:SelectDescription" name="ServiceCallService" labelExpression="Service" valueExpression="feature:service" candidatesExpression="aql:self.node.thing.services" candidateDisplayExpression="aql:candidate.name">
+                        <initialOperation>
+                          <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:self">
+                            <subModelOperations xsi:type="tool_1:SetValue" featureName="service" valueExpression="aql:newValue"/>
+                          </firstModelOperations>
+                        </initialOperation>
+                      </controls>
+                      <controls xsi:type="properties:ListDescription" name="ServiceCallArguments" labelExpression="Arguments" valueExpression="aql:self.arguments" displayExpression="aql:value.stringValue">
+                        <actions labelExpression="Add">
+                          <initialOperation>
+                            <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:self">
+                              <subModelOperations xsi:type="tool_1:CreateInstance" typeName="sbsml::Argument" referenceName="arguments">
+                                <subModelOperations xsi:type="properties:DialogModelOperation" titleExpression="New Dialog">
+                                  <buttons labelExpression="Cancel" closeDialogOnClick="true" rollbackChangesOnClose="true">
+                                    <initialOperation/>
+                                  </buttons>
+                                  <buttons labelExpression="OK" default="true" closeDialogOnClick="true">
+                                    <initialOperation/>
+                                  </buttons>
+                                  <page name="Default Page" labelExpression="Page" semanticCandidateExpression="var:self" groups="//@ownedViewpoints[name='SystemViewpoint']/@ownedRepresentations[name='SystemDiagram']/@defaultLayer/@toolSections.2/@ownedTools[name='CreateServiceCall']/@initialOperation/@firstModelOperations/@subModelOperations.0/@subModelOperations.0/@groups.0/@controls.2/@actions.0/@initialOperation/@firstModelOperations/@subModelOperations.0/@subModelOperations.0/@groups.0"/>
+                                  <groups name="Default Group" labelExpression="Group" semanticCandidateExpression="var:self">
+                                    <controls xsi:type="properties:TextDescription" name="ArgumentValue">
+                                      <initialOperation>
+                                        <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:self">
+                                          <subModelOperations xsi:type="tool_1:SetValue" featureName="stringValue" valueExpression="aql:newValue"/>
+                                        </firstModelOperations>
+                                      </initialOperation>
+                                    </controls>
+                                  </groups>
+                                </subModelOperations>
+                              </subModelOperations>
+                            </firstModelOperations>
+                          </initialOperation>
+                        </actions>
+                      </controls>
+                    </groups>
+                  </subModelOperations>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+        </toolSections>
+      </defaultLayer>
+    </ownedRepresentations>
+  </ownedViewpoints>
+  <ownedViewpoints name="NetworkViewpoint">
+    <ownedRepresentations xsi:type="description_1:DiagramDescription" name="NetworkDiagram" label="Network Diagram" domainClass="sbsml::SmartSystem" enablePopupBars="true">
+      <defaultLayer name="Default">
+        <edgeMappings name="NVConnection" sourceMapping="//@ownedViewpoints[name='NetworkViewpoint']/@ownedRepresentations[name='NetworkDiagram']/@defaultLayer/@containerMappings[name='NVConfiguration']/@subNodeMappings[name='NVNode']" targetMapping="//@ownedViewpoints[name='NetworkViewpoint']/@ownedRepresentations[name='NetworkDiagram']/@defaultLayer/@containerMappings[name='NVConfiguration']/@subNodeMappings[name='NVNode']" targetFinderExpression="aql:self.nodeB" sourceFinderExpression="aql:self.nodeA" domainClass="sbsml::Connection" useDomainElement="true">
+          <style sourceArrow="InputFillClosedArrow" targetArrow="InputFillClosedArrow" sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <centerLabelStyleDescription labelSize="6" showIcon="false" labelExpression="aql:self.portA.name + ' >-&lt; ' + self.portB.name">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <containerMappings name="NVConfiguration" semanticCandidatesExpression="feature:configs" domainClass="sbsml::Configuration">
+          <subNodeMappings name="NVNode" semanticCandidatesExpression="feature:eAllContents" domainClass="sbsml::Node">
+            <conditionnalStyles predicateExpression="aql:self.thing.oclIsTypeOf(sbsml::Actuator)">
+              <style xsi:type="style:EllipseNodeDescription" labelSize="9" showIcon="false" labelExpression="aql:self.name + '(' + self.thing.shortName + ')'" labelPosition="node" resizeKind="NSEW">
+                <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_red']"/>
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_red']"/>
+              </style>
+            </conditionnalStyles>
+            <conditionnalStyles predicateExpression="aql:self.thing.oclIsTypeOf(sbsml::Sensor)">
+              <style xsi:type="style:EllipseNodeDescription" labelSize="9" showIcon="false" labelExpression="aql:self.name + '(' + self.thing.shortName + ')'" labelPosition="node" resizeKind="NSEW">
+                <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_blue']"/>
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_blue']"/>
+              </style>
+            </conditionnalStyles>
+            <conditionnalStyles predicateExpression="aql:self.thing.oclIsTypeOf(sbsml::FogDevice)">
+              <style xsi:type="style:EllipseNodeDescription" labelSize="9" showIcon="false" labelExpression="aql:self.name + '(' + self.thing.shortName + ')'" labelPosition="node" resizeKind="NSEW">
+                <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_green']"/>
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_green']"/>
+              </style>
+            </conditionnalStyles>
+          </subNodeMappings>
+          <style xsi:type="style:FlatContainerStyleDescription" borderSizeComputationExpression="3" borderLineStyle="dash" labelSize="12" iconPath="/sbsml.design/img/icons/configuration.png">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_blue']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+            <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+          </style>
+        </containerMappings>
+        <toolSections name="ConfigurationTools" label="Configuration Tools">
+          <ownedTools xsi:type="tool:ContainerCreationDescription" name="CreateConfig" label="Add Configuration" containerMappings="//@ownedViewpoints[name='NetworkViewpoint']/@ownedRepresentations[name='NetworkDiagram']/@defaultLayer/@containerMappings[name='NVConfiguration']" iconPath="/sbsml.design/img/icons/configuration.png">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:CreateInstance" typeName="sbsml::Configuration" referenceName="configs"/>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:NodeCreationDescription" name="CreateNode" label="Add Node" nodeMappings="//@ownedViewpoints[name='NetworkViewpoint']/@ownedRepresentations[name='NetworkDiagram']/@defaultLayer/@containerMappings[name='NVConfiguration']/@subNodeMappings[name='NVNode']" iconPath="/sbsml.design/img/icons/node.png">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:CreateInstance" typeName="sbsml::Node" referenceName="nodes">
+                <subModelOperations xsi:type="properties:DialogModelOperation" titleExpression="New Node">
+                  <buttons labelExpression="Cancel" closeDialogOnClick="true" rollbackChangesOnClose="true">
+                    <initialOperation/>
+                  </buttons>
+                  <buttons labelExpression="OK" default="true" closeDialogOnClick="true">
+                    <initialOperation/>
+                  </buttons>
+                  <page name="Default Page" semanticCandidateExpression="var:self" groups="//@ownedViewpoints[name='NetworkViewpoint']/@ownedRepresentations[name='NetworkDiagram']/@defaultLayer/@toolSections.0/@ownedTools[name='CreateNode']/@initialOperation/@firstModelOperations/@subModelOperations.0/@groups.0"/>
+                  <groups name="Default Group" labelExpression="Node" semanticCandidateExpression="var:self">
+                    <controls xsi:type="properties:TextDescription" name="NodeName" labelExpression="Name" valueExpression="feature:name">
+                      <initialOperation>
+                        <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:self">
+                          <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:newValue"/>
+                        </firstModelOperations>
+                      </initialOperation>
+                    </controls>
+                    <controls xsi:type="properties:SelectDescription" name="NodeThingSelection" labelExpression="Thing" valueExpression="feature:thing" candidatesExpression="aql:self.eContainer().eContainer().things" candidateDisplayExpression="aql:candidate.name">
+                      <initialOperation>
+                        <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:self">
+                          <subModelOperations xsi:type="tool_1:SetValue" featureName="thing" valueExpression="aql:newValue"/>
+                        </firstModelOperations>
+                      </initialOperation>
+                    </controls>
+                  </groups>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:EdgeCreationDescription" name="ConnectNodes" label="Connect Nodes" precondition="aql:preSource.eContainer()=preTarget.eContainer() and preSource&lt;>preTarget" edgeMappings="//@ownedViewpoints[name='NetworkViewpoint']/@ownedRepresentations[name='NetworkDiagram']/@defaultLayer/@edgeMappings[name='NVConnection']" iconPath="/sbsml.design/img/icons/connection.png">
+            <sourceVariable name="source"/>
+            <targetVariable name="target"/>
+            <sourceViewVariable name="sourceView"/>
+            <targetViewVariable name="targetView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self.eContainer()">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="sbsml::Connection" referenceName="connections">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="nodeA" valueExpression="var:source"/>
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="nodeB" valueExpression="var:target"/>
+                  <subModelOperations xsi:type="properties:DialogModelOperation" titleExpression="Connect Nodes">
+                    <buttons labelExpression="Cancel" closeDialogOnClick="true" rollbackChangesOnClose="true">
+                      <initialOperation/>
+                    </buttons>
+                    <buttons labelExpression="OK" default="true" closeDialogOnClick="true">
+                      <initialOperation/>
+                    </buttons>
+                    <page name="Default Page" semanticCandidateExpression="var:self" groups="//@ownedViewpoints[name='NetworkViewpoint']/@ownedRepresentations[name='NetworkDiagram']/@defaultLayer/@toolSections.0/@ownedTools[name='ConnectNodes']/@initialOperation/@firstModelOperations/@subModelOperations.0/@subModelOperations.2/@groups.0"/>
+                    <groups name="Default Group" labelExpression="Ports" semanticCandidateExpression="var:self">
+                      <controls xsi:type="properties:SelectDescription" name="PortASelect" labelExpression="aql:'Port of ' + self.nodeA.name" valueExpression="feature:portA" candidatesExpression="aql:self.nodeA.thing.ports" candidateDisplayExpression="aql:candidate.name">
+                        <initialOperation>
+                          <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:self">
+                            <subModelOperations xsi:type="tool_1:SetValue" featureName="portA" valueExpression="aql:newValue"/>
+                          </firstModelOperations>
+                        </initialOperation>
+                      </controls>
+                      <controls xsi:type="properties:SelectDescription" name="PortBSelect" labelExpression="aql:'Port of ' + self.nodeB.name" valueExpression="feature:portB" candidatesExpression="aql:self.nodeB.thing.ports" candidateDisplayExpression="aql:candidate.name">
+                        <initialOperation>
+                          <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:self">
+                            <subModelOperations xsi:type="tool_1:SetValue" featureName="portB" valueExpression="aql:newValue"/>
+                          </firstModelOperations>
+                        </initialOperation>
+                      </controls>
+                    </groups>
+                  </subModelOperations>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+        </toolSections>
+      </defaultLayer>
+    </ownedRepresentations>
+  </ownedViewpoints>
+</description:Group>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <!-- @generated sbsml -->
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="sbsml.presentation.SbsmlModelWizardID"
+            name="%_UI_SbsmlModelWizard_label"
+            class="sbsml.presentation.SbsmlModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/SbsmlModelFile.gif">
+         <description>%_UI_SbsmlModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated sbsml -->
+      <editor
+            id="sbsml.presentation.SbsmlEditorID"
+            name="%_UI_SbsmlEditor_label"
+            icon="icons/full/obj16/SbsmlModelFile.gif"
+            extensions="sbsml"
+            class="sbsml.presentation.SbsmlEditor"
+            contributorClass="sbsml.presentation.SbsmlActionBarContributor">
+      </editor>
+   </extension>
+
+</plugin>

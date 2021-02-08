@@ -1,0 +1,6 @@
+-- @path CAEX=/sbsml.atl/caex/CAEX.ecore
+-- @path SBSML=/sbsml/model/sbsml.ecore
+
+module sbsml2caex;
+create OUT: CAEX from IN: SBSML;
+

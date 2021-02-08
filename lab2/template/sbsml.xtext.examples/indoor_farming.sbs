@@ -1,0 +1,84 @@
+system IndoorFarming {
+
+	units {
+		Percent("%"): float,
+		Lumen: int,
+		Second("sec"): int
+	}
+	
+	sensor HumiditySensor(HS) {
+		single port HS_GPIO
+		param humidity: Percent
+	}
+	
+	sensor LightSensor(LS) {
+		single port LS_GPIO
+		param brightness: Lumen
+	}
+	
+	actuator WateringValve(WV) {
+		single port WV_GPOI
+		
+		service waterPlant(duration: Second)
+	}
+	
+	actuator Lamp(L) {
+		single port L_GPIO
+		
+		service turnOn()
+		service turnOff()
+	}
+	
+	fogdevice Raspberry(RPi) {
+		single port RPI_GPIO_1
+		single port RPI_GPIO_2
+		single port RPI_GPIO_3
+		single port RPI_GPIO_4
+		mips: 10000
+	}
+	
+	config Basil {
+		node bashs: HumiditySensor
+		node basls: LightSensor
+		node baswv: WateringValve
+		node basl: Lamp
+		node basrpi: Raspberry
+		
+		connections: {
+			basrpi.RPI_GPIO_1 >-< bashs.HS_GPIO, 
+			basrpi.RPI_GPIO_2 >-< basls.LS_GPIO,
+			basrpi.RPI_GPIO_3 >-< baswv.WV_GPOI,
+			basrpi.RPI_GPIO_4 >-< basl.L_GPIO
+		}
+		
+		controller LowHumidityController computed on basrpi {
+			mips: 500
+			on:{
+				FloatThreshold(bashs.humidity < 0.8)
+			}
+			call:{
+				baswv.waterPlant(10);
+			}
+		}
+		
+		controller SunShineController computed on basrpi {
+			mips: 300
+			on:{
+				IntThreshold(basls.brightness > 100)
+			}
+			call:{
+				basl.turnOff();
+			}
+		}
+		
+		controller DarknessController computed on basrpi {
+			mips: 300
+			on:{
+				IntThreshold(basls.brightness < 100)
+			}
+			call:{
+				basl.turnOn();
+			}
+		}
+	}
+}

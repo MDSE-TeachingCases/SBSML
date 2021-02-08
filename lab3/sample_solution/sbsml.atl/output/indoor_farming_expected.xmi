@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<CAEX:CAEXFile xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:CAEX="http://caex" fileName="Smart Indoor Farming System" schemaVersion="2.15">
+  <instanceHierarchy name="Smart Indoor Farming System">
+    <internalElement name="Basil">
+      <internalElement name="BasilHS(HumiditySensor)">
+        <internalElement name="humidity">
+          <attribute name="unit" value="Percent"/>
+        </internalElement>
+      </internalElement>
+      <internalElement name="BasilLS(LightSensor)">
+        <internalElement name="brightness">
+          <attribute name="unit" value="Lumen"/>
+        </internalElement>
+      </internalElement>
+      <internalElement name="BasilWV(WateringValve)">
+        <internalElement name="waterPlant(duration: Second)">
+          <attribute name="description" value="Waters the plant for the given duration"/>
+        </internalElement>
+      </internalElement>
+      <internalElement name="BasilLamp(Lamp)">
+        <internalElement name="turnOn()"/>
+        <internalElement name="turnOff()"/>
+      </internalElement>
+      <internalElement name="BasilRPI(RaspberryPi)">
+        <attribute name="mips" value="10000"/>
+      </internalElement>
+    </internalElement>
+  </instanceHierarchy>
+</CAEX:CAEXFile>

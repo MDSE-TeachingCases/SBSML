@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="ASCII"?>
+<sbsml:SmartSystem xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:sbsml="http://big.tuwien.ac.at/sbsml" name="Occupy">
+  <things xsi:type="sbsml:Sensor" name="Lock" shortName="L">
+    <ports name="L_GPIO" singleConnection="true"/>
+    <parameters name="locked" unit="DoorState"/>
+  </things>
+  <things xsi:type="sbsml:Actuator" name="Display" shortName="D">
+    <ports name="D_GPIO" singleConnection="true"/>
+    <services name="set">
+      <parameters name="occupied" unit="DoorState"/>
+    </services>
+  </things>
+  <things xsi:type="sbsml:FogDevice" name="RPi" shortName="R" mips="1000">
+    <ports name="R_GPIO_1" singleConnection="true"/>
+    <ports name="R_GPIO_2" singleConnection="true"/>
+  </things>
+  <units name="DoorState" type="BOOL"/>
+  <configs name="WC">
+    <nodes name="wcLock" thing="Lock"/>
+    <nodes name="wcRpi" thing="RPi"/>
+    <nodes name="wcDisplay" thing="Display"/>
+    <connections portB="D_GPIO" portA="R_GPIO_1" nodeA="wcRpi" nodeB="wcDisplay"/>
+    <connections portB="L_GPIO" portA="R_GPIO_2" nodeA="wcRpi" nodeB="wcLock"/>
+    <controllers name="Unlocked" mips="100" computationNode="wcRpi">
+      <threshold xsi:type="sbsml:BoolThreshold" source="wcLock" parameter="locked"/>
+      <servicecalls service="set" node="wcDisplay">
+        <arguments stringValue="false"/>
+      </servicecalls>
+    </controllers>
+    <controllers name="Locked" mips="100" computationNode="wcRpi">
+      <threshold xsi:type="sbsml:BoolThreshold" source="wcLock" parameter="locked" triggerOn="true"/>
+      <servicecalls service="set" node="wcDisplay">
+        <arguments stringValue="true"/>
+      </servicecalls>
+    </controllers>
+  </configs>
+</sbsml:SmartSystem>

@@ -1,0 +1,108 @@
+ePackageImport sbsml
+
+/* Scenario 1 */
+rule SingleToMultiConnPort() {
+	graph {
+		multiRule SingleToMultiConnPort {
+			graph {
+				preserve node configuration: Configuration
+				preserve node conn1: Connection
+				preserve node conn2: Connection
+				preserve node connNode: Node
+				preserve node port: Port {
+					singleConnection=true
+					set singleConnection=false
+				}
+				
+				edges [
+					(preserve configuration->conn1: connections),
+					(preserve configuration->conn2: connections),
+					(preserve conn1->connNode: nodeA),
+					(preserve conn2->connNode: nodeA),
+					(preserve conn1->port: portA),
+					(preserve conn2->port: portA)
+				]
+			}
+		}
+	}
+}
+
+/* Scenario 2 */
+rule RemoveUnusedSensorNodes() {
+	graph {
+		multiRule RemoveUnusedSensorNodes {
+			graph {
+				preserve node configuration: Configuration
+				preserve node controller: Controller
+				delete node sensorNode: Node 
+				preserve node sensor: Sensor
+				forbid node threshold: Threshold
+				
+				edges [
+					(delete configuration->sensorNode: nodes),
+					(preserve configuration->controller: controllers),
+					(delete sensorNode->sensor: thing),
+					(forbid controller->threshold: threshold),
+					(forbid threshold->sensorNode: source)
+				]
+			}
+		}
+	}
+}
+
+
+/* Scenario 3 */
+unit DuplicateFogNodeAndMoveController(IN nodeName:EString, IN duplicateName:EString, IN controllerName:EString) {
+	Duplicate1FogNode(nodeName, duplicateName)
+	MoveController(duplicateName, controllerName)
+}
+
+/* Scenario 3a */
+rule Duplicate1FogNode(IN nodeName:EString, IN duplicateName:EString) {
+	graph {
+		preserve node config: Configuration
+		preserve node existingNode: Node {
+			name=nodeName
+		}
+		create node creatingNode: Node {
+			name=duplicateName
+		}
+		create node conn: Connection
+		preserve node port: Port {
+			singleConnection=false
+		}
+		preserve node fogDevice: FogDevice
+		
+		edges [
+			(preserve config->existingNode: nodes),
+			(create config->creatingNode: nodes),
+			(create config->conn: connections),
+			(create conn->creatingNode: nodeA),
+			(create conn->existingNode: nodeB),
+			(create conn->port: portA),
+			(create conn->port: portB),
+			(create creatingNode->fogDevice: thing),
+			(preserve fogDevice->port: ports),
+			(preserve existingNode->fogDevice: thing)
+		]
+	}
+}
+
+/* Scenario 3b */
+rule MoveController(IN nodeName:EString, IN controllerName:EString) {
+	graph {
+		preserve node controller: Controller {
+			name=controllerName
+		}
+		preserve node fogNode: Node {
+			name=nodeName
+		}
+		preserve node fogDevice: FogDevice
+		
+		edges [
+			(create controller->fogNode: computationNode),
+			(preserve fogNode->fogDevice: thing)
+		]
+	}
+}
+

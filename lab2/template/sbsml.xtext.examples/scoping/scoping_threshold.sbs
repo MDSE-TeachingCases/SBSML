@@ -1,0 +1,56 @@
+system IndoorFarming {
+
+	units {
+		Percent("%"): float,
+		Lumen: int
+	}
+	
+	sensor HumiditySensor(HS) {
+		single port HS_GPIO
+		param humidity: Percent
+	}
+	
+	sensor LightSensor(LS) {
+		single port LS_GPIO
+		param brightness: Lumen
+	}
+		
+	actuator WateringValve(WV) {
+		single port WV_GPOI
+		
+		service waterPlant()
+	}
+	
+	
+	fogdevice Raspberry(RPi) {
+		single port RPI_GPIO_1
+		single port RPI_GPIO_2
+		single port RPI_GPIO_3
+		mips: 10000
+	}
+	
+	config Basil {
+		node bashs: HumiditySensor
+		node basls: LightSensor
+		node baswv: WateringValve
+		node basrpi: Raspberry
+		
+		
+		connections: {
+			basrpi.RPI_GPIO_1 >-< bashs.HS_GPIO,
+			basrpi.RPI_GPIO_2 >-< basls.LS_GPIO,
+			basrpi.RPI_GPIO_3 >-< baswv.WV_GPOI
+		}
+		
+		
+		controller LowHumidityController computed on basrpi {
+			mips: 500
+			on:{
+				FloatThreshold([?].[?] < 0.8)
+			}
+			call:{
+				baswv.waterPlant();
+			}
+		}
+	}
+}

@@ -1,0 +1,198 @@
+system SmartHome {
+	
+	units {
+		Moving: bool,
+		Percent('%'): float,
+		Celsius('°C'): float,
+		PPM: int,
+		HeatingLevel: int,
+		Second('sec'): int
+	}
+	
+	
+	sensor HumiditySensor(HS) {
+		single port HS_GPIO
+		param humidity: Percent
+	}
+	
+	sensor MovementSensor(MS) {
+		single port MS_GPIO
+		param isMoving: Moving
+	}
+	
+	sensor GadDetector(GD) {
+		single port GD_GPIO
+		param concentration: PPM
+	}
+	
+	sensor TemperaturSensor(TS) {
+		single port TS_GPIO
+		param temperature: Celsius
+	}
+	
+	actuator Ventilator(V) {
+		single port V_GPIO
+		
+		service startVent()
+	}
+	
+	actuator LightBulb(LB) {
+		single port LB_ZIGBEE
+		single port LB_GPIO
+		
+		service setLight(brightness: Percent, timeout: Second)
+		service alarm()
+	}
+	
+	actuator Radiator(R) {
+		single port R_GPIO
+		
+		service setHeatingLevel(level: HeatingLevel)
+	}
+	
+	actuator AlarmBell(AB) {
+		single port AB_GPIO
+		
+		service ringBell()
+	}
+	
+	fogdevice Raspberry(RPi) {
+		single port RPI_GPIO_1
+		single port RPI_GPIO_2
+		single port RPI_GPIO_3
+		single port RPI_GPIO_4
+		single port RPI_USB
+		mips: 10000
+	}
+	
+	fogdevice ZigBeeUSBGateway(ZB) {
+		single port ZB_USB
+		port ZB_RF4CE
+		mips: 100
+	}
+	
+	config Basement {
+		node BaseM: MovementSensor
+		node BaseGD: GadDetector
+		node BasePi: Raspberry
+		node BaseBell: AlarmBell
+		node BaseL: LightBulb
+		
+		connections: {
+			BasePi.RPI_GPIO_1 >-< BaseM.MS_GPIO,
+			BasePi.RPI_GPIO_2 >-< BaseGD.GD_GPIO,
+			BasePi.RPI_GPIO_3 >-< BaseBell.AB_GPIO,
+			BasePi.RPI_GPIO_4 >-< BaseL.LB_GPIO 
+		}
+		
+		controller BaseLightController computed on BasePi {
+			mips: 100
+			on: {
+				BoolThreshold(BaseM.isMoving=true)
+			}
+			call: {
+				BaseL.setLight(1.0, 500);
+			}
+		}
+		
+		controller BaseGasLeakController computed on BasePi {
+			mips: 100
+			on: {
+				IntThreshold(BaseGD.concentration > 500)
+			}
+			call: {
+				BaseL.alarm();
+				BaseBell.ringBell();
+			}
+		}
+	}
+	
+	config Bathroom {
+		node BathV: Ventilator
+		node BathM: MovementSensor
+		node BathHS: HumiditySensor
+		node BathPi: Raspberry
+		
+		connections: {
+			BathPi.RPI_GPIO_1 >-< BathV.V_GPIO,
+			BathPi.RPI_GPIO_2 >-< BathM.MS_GPIO,
+			BathPi.RPI_GPIO_3 >-< BathHS.HS_GPIO
+		}
+		
+		controller BathHumidityController computed on BathPi {
+			mips: 100
+			on: {
+				FloatThreshold(BathHS.humidity > 0.8),
+				BoolThreshold(BathM.isMoving=false)
+			}
+			call: {
+				BathV.startVent();
+			}
+		}
+	}
+	
+	config Livingroom {
+		node LivBulb1: LightBulb
+		node LivBulb2: LightBulb
+		node LivBulb3: LightBulb
+		node LivR: Radiator
+		node LivM1: MovementSensor
+		node LivM2: MovementSensor
+		node LivTS: TemperaturSensor
+		node LivPi: Raspberry
+		node LivZGW: ZigBeeUSBGateway
+		
+		connections: {
+			LivBulb1.LB_ZIGBEE >-< LivZGW.ZB_RF4CE,
+			LivBulb2.LB_ZIGBEE >-< LivZGW.ZB_RF4CE,
+			LivBulb3.LB_ZIGBEE >-< LivZGW.ZB_RF4CE,
+			LivPi.RPI_USB >-< LivZGW.ZB_USB,
+			LivPi.RPI_GPIO_1 >-< LivR.R_GPIO,
+			LivPi.RPI_GPIO_2 >-< LivM1.MS_GPIO,
+			LivPi.RPI_GPIO_3 >-< LivM2.MS_GPIO,
+			LivPi.RPI_GPIO_4 >-< LivTS.TS_GPIO
+		}
+		
+		controller LivLowTemperatureController computed on LivPi {
+			mips: 100
+			on: {
+				FloatThreshold(LivTS.temperature < 20.0)
+			}
+			call: {
+				LivR.setHeatingLevel(5);
+			}
+		}
+		
+		controller LivHighTemperatureController computed on LivPi {
+			mips: 100
+			on: {
+				FloatThreshold(LivTS.temperature > 22.0)
+			}
+			call: {
+				LivR.setHeatingLevel(0);
+			}
+		}
+		
+		controller LivLightController1 computed on LivPi {
+			mips: 100
+			on: {
+				BoolThreshold(LivM1.isMoving=true)
+			}
+			call: {
+				LivBulb1.setLight(1.0, 600);
+			}
+		}
+		
+		controller LivLightController2 computed on LivPi {
+			mips: 100
+			on: {
+				BoolThreshold(LivM2.isMoving=true)
+			}
+			call: {
+				LivBulb2.setLight(1.0, 600);
+				LivBulb3.setLight(1.0, 600);
+			}
+		}
+	}
+	
+}

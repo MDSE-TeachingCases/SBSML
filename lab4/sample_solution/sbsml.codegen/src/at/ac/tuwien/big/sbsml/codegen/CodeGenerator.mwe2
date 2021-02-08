@@ -1,0 +1,37 @@
+module generator
+
+import org.eclipse.emf.mwe.utils.*
+
+var targetDir = "src-gen"
+var modelPath = "models"
+var slotID = "models-slot"
+
+Workflow {
+
+	bean = StandaloneSetup {
+		registerGeneratedEPackage = "sbsml.SbsmlPackage"
+		
+	}
+		
+	component = DirectoryCleaner {
+		directory = targetDir
+	}
+
+	component = at.ac.tuwien.big.sbsml.codegen.lib.SimulatorGeneratorSupport {}
+
+	component = org.eclipse.xtext.mwe.Reader {
+		path = modelPath
+		register = at.ac.tuwien.big.sbsml.codegen.lib.SimulatorGeneratorSetup {}
+		loadResource = {
+			slot = slotID
+		}
+	}
+
+	component = org.eclipse.xtext.generator.GeneratorComponent {
+		register = at.ac.tuwien.big.sbsml.codegen.lib.SimulatorGeneratorSetup {}
+		slot = slotID
+		outlet = {
+			path = targetDir
+		}
+	}
+}

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sbsml:SmartSystem
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:sbsml="http://big.tuwien.ac.at/sbsml"
+    name="Smart Indoor Farming System">
+  <things xsi:type="sbsml:Sensor"
+      name="HumiditySensor"
+      shortName="HS">
+    <ports name="HS_GPIO"
+        singleConnection="true"/>
+    <parameters
+        name="humidity"
+        unit="Percent"/>
+  </things>
+  <things xsi:type="sbsml:FogDevice"
+      name="RaspberryPi"
+      shortName="RPI"
+      mips="10000">
+    <ports name="RPI_GPIO_1"
+        singleConnection="true"/>
+  </things>
+  <units name="Percent"
+      type="FLOAT"
+      abbreviation="%"/>
+  <units name="Lumen"
+      abbreviation="lu"/>
+  <units name="Second"
+      abbreviation="sec"/>
+  <configs name="Basil">
+    <nodes name="BasilHS"
+        thing="HumiditySensor"/>
+    <nodes name="BasilRPI"
+        thing="RaspberryPi"/>
+    <nodes name="BasilHS2"
+        thing="HumiditySensor"/>
+    <connections
+        portB="HS_GPIO"
+        portA="RPI_GPIO_1"
+        nodeA="BasilRPI"
+        nodeB="BasilHS"/>
+    <connections
+        portB="HS_GPIO"
+        portA="RPI_GPIO_1"
+        nodeA="BasilRPI"
+        nodeB="BasilHS2"/>
+  </configs>
+</sbsml:SmartSystem>

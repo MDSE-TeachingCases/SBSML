@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.emf.henshin.interpreter.ui.ruleLaunchConfigurationType">
+<stringAttribute key="INPUT_URI" value="platform:/resource/sbsml.henshin/model/scenario_3b_moveController.xmi"/>
+<stringAttribute key="MODULE_PATH" value="platform:/resource/sbsml.henshin/henshin/sbsml.henshin"/>
+<booleanAttribute key="OPEN_COMPARE" value="false"/>
+<stringAttribute key="OUTPUT_URI" value="platform:/resource/sbsml.henshin/model/scenario_3b_moveController_transformed.xmi"/>
+<mapAttribute key="PARAMETER_TYPES">
+<mapEntry key="controllerName" value="2"/>
+<mapEntry key="nodeName" value="2"/>
+</mapAttribute>
+<mapAttribute key="PARAMETER_VALUES">
+<mapEntry key="controllerName" value="DarknessController"/>
+<mapEntry key="nodeName" value="BasilRPI_2"/>
+</mapAttribute>
+<intAttribute key="UNIT_INDEX" value="0"/>
+<stringAttribute key="UNIT_NAME" value="MoveController"/>
+<listAttribute key="UNSET_PARAMETERS"/>
+</launchConfiguration>

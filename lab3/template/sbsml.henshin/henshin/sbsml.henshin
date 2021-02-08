@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<henshin:Module xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:henshin="http://www.eclipse.org/emf/2011/Henshin" xmi:id="_viJLUA_DEeuCT55zbzDzfA">
+  <imports href="../../sbsml/model/sbsml.ecore#/"/>
+  <units xsi:type="henshin:Rule" xmi:id="_xqG9YA_DEeuCT55zbzDzfA" name="Duplicate1FogNode">
+    <parameters xmi:id="_K2dmoBkQEeucRrgbwoCGnw" name="nodeName" kind="IN">
+      <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </parameters>
+    <parameters xmi:id="_ledoECf6EeuCt4IHth3d2Q" name="duplicateName" kind="IN">
+      <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </parameters>
+    <lhs xmi:id="_xqMc8A_DEeuCT55zbzDzfA" name="Lhs"/>
+    <rhs xmi:id="_xqNEAA_DEeuCT55zbzDzfA" name="Rhs"/>
+  </units>
+  <units xsi:type="henshin:Rule" xmi:id="_l3SbkBkDEeucRrgbwoCGnw" name="SingleToMultiConnPort">
+    <lhs xmi:id="_l3WtABkDEeucRrgbwoCGnw" name="Lhs"/>
+    <rhs xmi:id="_l3WtARkDEeucRrgbwoCGnw" name="Rhs"/>
+  </units>
+  <units xsi:type="henshin:Rule" xmi:id="_-PumEBkDEeucRrgbwoCGnw" name="RemoveUnusedSensorNodes">
+    <lhs xmi:id="_-Pv0MBkDEeucRrgbwoCGnw" name="Lhs"/>
+    <rhs xmi:id="_-Pv0MRkDEeucRrgbwoCGnw" name="Rhs"/>
+  </units>
+  <units xsi:type="henshin:Rule" xmi:id="_7tN9UBkUEeuvX5cwavdWAg" name="MoveController">
+    <parameters xmi:id="_-NOmgBkVEeuvX5cwavdWAg" name="nodeName" kind="IN">
+      <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </parameters>
+    <parameters xmi:id="__S8G0RkUEeuvX5cwavdWAg" name="controllerName" kind="IN">
+      <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </parameters>
+    <lhs xmi:id="_7tPLcBkUEeuvX5cwavdWAg" name="Lhs"/>
+    <rhs xmi:id="_7tPLcRkUEeuvX5cwavdWAg" name="Rhs"/>
+  </units>
+  <units xsi:type="henshin:SequentialUnit" xmi:id="_rFHZoCqOEeulauqtjUItkQ" name="DuplicateFogNodeAndMoveController">
+    <parameters xmi:id="_rdZ90CqOEeulauqtjUItkQ" name="nodeName" kind="IN">
+      <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </parameters>
+    <parameters xmi:id="_rdZ90SqOEeulauqtjUItkQ" name="duplicateName" kind="IN">
+      <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </parameters>
+    <parameters xmi:id="_rdZ90iqOEeulauqtjUItkQ" name="controllerName" kind="IN">
+      <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </parameters>
+  </units>
+</henshin:Module>
