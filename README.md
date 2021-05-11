@@ -2,7 +2,7 @@
 
 ## Course Content
 
-# |Module - MDSE book chapter | Lecture Video | Tutorial Video | Lab
+&#35; |Module - MDSE book chapter | Lecture Video | Tutorial Video | Lab
 ---|---|---|---|---
 1. | Introduction to MDE - 1 & 2 | [Principles ⇲](https://www.youtube.com/watch?v=uoD-cztgy2o&ab_channel=DominikBork) | - | -
 2. | Metamodeling - 6 & 7 | [Introduction ⇲](https://www.youtube.com/watch?v=SDvTLWvIWHk&ab_channel=DominikBork) | - | -
