@@ -4,22 +4,16 @@ In this assignment the students have to develop concrete syntaxes for the **Smar
 ## Xtext
 A textual concrete syntax has to be implemented using Xtext. Therefor the students have define a grammar in the [Sbsml.xtext file](./template/sbsml.xtext/src/at/ac/tuwien/big/Sbsml.xtext). Further the students have to provide scoping support by implementing the described scenarios in the [SbsmlScopeProvider.java file](./template/sbsml.xtext/src/at/ac/tuwien/big/scoping/SbsmlScopeProvider.java).
 
+### Videos
+1. [Introduction to Textual Modeling Languages  ⇲](https://youtu.be/nQVhs818dfs)
+2. [Xtext ⇲](https://youtu.be/QkGjnVhZVRg)
+3. [Xtext Tutorial ⇲](https://www.youtube.com/watch?v=EKpqPX5tcn0&ab_channel=DominikBork)
+
+
 ## Sirius
 A graphical concrete syntax has to be implemented using Sirius. Therefor the students have to define mappings for both viewpoints in the [sbsml.odesign file](./template/sbsml.design/description/sbsml.odesign) as well as adding creation tools for element creation support for the specified SBSML elements.
 
-## Lecture Videos
-### Textual Concrete Syntax
-1. [Introduction ⇲](https://youtu.be/nQVhs818dfs)
-2. [Xtext ⇲](https://youtu.be/QkGjnVhZVRg)
-
-### Graphical Concrete Syntax
-1. [Introduction ⇲](https://youtu.be/DHyMcpzyFeU)
-2. [Approaches ⇲](https://youtu.be/Xa6JHqzM6F0)
-
-
-## Tutorial Videos
-### Xtext
-[Xtext ⇲](https://www.youtube.com/watch?v=EKpqPX5tcn0&ab_channel=DominikBork)
-
-### Sirius
-[Sirius ⇲](https://www.youtube.com/watch?v=R5fCANLQbhY&ab_channel=DominikBork)
+### Videos
+1. [Introduction to Grpahical Modeling Languages ⇲](https://youtu.be/DHyMcpzyFeU)
+2. [Graphical Concere Syntax Approaches ⇲](https://youtu.be/Xa6JHqzM6F0)
+3. [Sirius Tutorial ⇲](https://www.youtube.com/watch?v=R5fCANLQbhY&ab_channel=DominikBork)
