@@ -1,4 +1,4 @@
-# Model Engineering WS 2020/21
+# Model Engineering WS 2020/21  [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5026051.svg)](https://doi.org/10.5281/zenodo.5026051)
 
 ## Course Content
 
