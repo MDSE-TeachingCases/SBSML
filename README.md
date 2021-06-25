@@ -12,3 +12,5 @@
 `6.` | Model-Transformations - 8 | [Introduction ⇲](https://youtu.be/tnfvuOwwB1U) <br> [Graph Transformations ⇲](https://youtu.be/wm0OG7Cc44k) | [Henshin ⇲](https://www.youtube.com/watch?v=pvCpeuZKii8&ab_channel=DominikBork) | [Lab 3](./lab3)
 `7.` | ATL - 8 | - | [ATL ⇲](https://www.youtube.com/watch?v=Ti45EXFrcjY&ab_channel=DominikBork) | [Lab 3](./lab3)
 `8.` | Code Generation - 9 | [Introduction ⇲](https://youtu.be/9waNt5ekssU) <br> [Model2Model Transformation ⇲](https://youtu.be/dSV1cuxINdQ) <br> [Programming Languages ⇲](https://youtu.be/AozuYa5uFj8) <br> [Xtend ⇲](https://youtu.be/GnoFNw0ynH4) | [Xtend Setup ⇲](https://www.youtube.com/watch?v=syuUv_6mig4&ab_channel=DominikBork) <br> [Xtend ⇲](https://www.youtube.com/watch?v=qSb4S4VQX5w&ab_channel=DominikBork) | [Lab 4](./lab4)
+
+The course featuring this teaching case heavily used the openly available slides of the [Model-driven Software Engineering in Practive book ⇲](https://mdse-book.com/bonus-content/)
